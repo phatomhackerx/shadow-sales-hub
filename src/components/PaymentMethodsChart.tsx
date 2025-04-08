@@ -4,10 +4,11 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recha
 const data = [
   { name: "Cartão de Crédito", value: 65 },
   { name: "Pix", value: 25 },
-  { name: "Boleto", value: 10 }
+  { name: "Boleto", value: 8 },
+  { name: "Cartão de Débito", value: 2 }
 ];
 
-const COLORS = ["#3B82F6", "#10B981", "#F59E0B"];
+const COLORS = ["#3B82F6", "#10B981", "#F59E0B", "#8B5CF6"];
 
 export function PaymentMethodsChart() {
   return (

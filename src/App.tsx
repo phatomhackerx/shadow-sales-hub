@@ -9,50 +9,13 @@ import Dashboard from "./pages/Dashboard";
 import Produtos from "./pages/Produtos";
 import Vendas from "./pages/Vendas";
 import Assinaturas from "./pages/Assinaturas";
+import Relatorios from "./pages/Relatorios";
+import Afiliados from "./pages/Afiliados";
+import Financeiro from "./pages/Financeiro";
+import Integracoes from "./pages/Integracoes";
+import Cupons from "./pages/Cupons";
+import Configuracoes from "./pages/Configuracoes";
 import NotFound from "./pages/NotFound";
-
-// Páginas temporárias para as outras seções
-const RelatoriosPage = () => (
-  <div className="animate-fade-in">
-    <h1 className="text-2xl font-bold tracking-tight">Relatórios</h1>
-    <p className="text-muted-foreground">Página em desenvolvimento</p>
-  </div>
-);
-
-const AfiliadosPage = () => (
-  <div className="animate-fade-in">
-    <h1 className="text-2xl font-bold tracking-tight">Afiliados</h1>
-    <p className="text-muted-foreground">Página em desenvolvimento</p>
-  </div>
-);
-
-const FinanceiroPage = () => (
-  <div className="animate-fade-in">
-    <h1 className="text-2xl font-bold tracking-tight">Financeiro</h1>
-    <p className="text-muted-foreground">Página em desenvolvimento</p>
-  </div>
-);
-
-const IntegracoesPage = () => (
-  <div className="animate-fade-in">
-    <h1 className="text-2xl font-bold tracking-tight">Integrações</h1>
-    <p className="text-muted-foreground">Página em desenvolvimento</p>
-  </div>
-);
-
-const CuponsPage = () => (
-  <div className="animate-fade-in">
-    <h1 className="text-2xl font-bold tracking-tight">Cupons</h1>
-    <p className="text-muted-foreground">Página em desenvolvimento</p>
-  </div>
-);
-
-const ConfiguracoesPage = () => (
-  <div className="animate-fade-in">
-    <h1 className="text-2xl font-bold tracking-tight">Configurações</h1>
-    <p className="text-muted-foreground">Página em desenvolvimento</p>
-  </div>
-);
 
 const queryClient = new QueryClient();
 
@@ -68,12 +31,12 @@ const App = () => (
             <Route path="/produtos" element={<Produtos />} />
             <Route path="/vendas" element={<Vendas />} />
             <Route path="/assinaturas" element={<Assinaturas />} />
-            <Route path="/relatorios" element={<RelatoriosPage />} />
-            <Route path="/afiliados" element={<AfiliadosPage />} />
-            <Route path="/financeiro" element={<FinanceiroPage />} />
-            <Route path="/integracoes" element={<IntegracoesPage />} />
-            <Route path="/cupons" element={<CuponsPage />} />
-            <Route path="/configuracoes" element={<ConfiguracoesPage />} />
+            <Route path="/relatorios" element={<Relatorios />} />
+            <Route path="/afiliados" element={<Afiliados />} />
+            <Route path="/financeiro" element={<Financeiro />} />
+            <Route path="/integracoes" element={<Integracoes />} />
+            <Route path="/cupons" element={<Cupons />} />
+            <Route path="/configuracoes" element={<Configuracoes />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
