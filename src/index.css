@@ -49,6 +49,19 @@
   html {
     @apply scroll-smooth;
   }
+  
+  /* Improve scrollbar appearance */
+  ::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-secondary/70 rounded-full hover:bg-secondary/90 transition-colors;
+  }
 }
 
 @layer utilities {
@@ -89,6 +102,22 @@
   .text-gradient {
     @apply bg-gradient-to-br from-white to-white/70 bg-clip-text text-transparent;
   }
+  
+  .button-gradient {
+    @apply bg-gradient-to-r from-highlight to-blue-600 hover:from-highlight/90 hover:to-blue-700 transition-colors;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-secondary/40 to-secondary/20 hover:from-secondary/50 hover:to-secondary/30 transition-all duration-300;
+  }
+  
+  .dropdown-content {
+    @apply bg-secondary/90 backdrop-blur-sm border border-border/40 shadow-xl;
+  }
+  
+  .subtle-highlight {
+    @apply border-highlight/20 bg-highlight/5 hover:bg-highlight/10 transition-colors;
+  }
 }
 
 /* Custom animations */
@@ -103,4 +132,34 @@
 
 .pulse-animation {
   animation: pulse-glow 2s infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-animation {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
 }

@@ -24,6 +24,8 @@ const App = () => {
       queries: {
         refetchOnWindowFocus: false,
         retry: 1,
+        staleTime: 5 * 60 * 1000, // 5 minutes
+        gcTime: 10 * 60 * 1000, // 10 minutes
       },
     },
   });
@@ -32,7 +34,20 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Sonner position="top-right" expand closeButton theme="dark" />
+        <Sonner 
+          position="top-right" 
+          expand 
+          closeButton 
+          theme="dark" 
+          richColors 
+          toastOptions={{
+            style: { 
+              background: 'hsl(var(--secondary))',
+              border: '1px solid hsl(var(--border))',
+              color: 'hsl(var(--foreground))',
+            },
+          }} 
+        />
         <BrowserRouter>
           <Routes>
             <Route element={<AppLayout />}>
