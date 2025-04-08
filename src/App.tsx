@@ -17,32 +17,35 @@ import Cupons from "./pages/Cupons";
 import Configuracoes from "./pages/Configuracoes";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route element={<AppLayout />}>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/produtos" element={<Produtos />} />
-            <Route path="/vendas" element={<Vendas />} />
-            <Route path="/assinaturas" element={<Assinaturas />} />
-            <Route path="/relatorios" element={<Relatorios />} />
-            <Route path="/afiliados" element={<Afiliados />} />
-            <Route path="/financeiro" element={<Financeiro />} />
-            <Route path="/integracoes" element={<Integracoes />} />
-            <Route path="/cupons" element={<Cupons />} />
-            <Route path="/configuracoes" element={<Configuracoes />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  // Move the queryClient creation inside the component function
+  const queryClient = new QueryClient();
+  
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route element={<AppLayout />}>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/produtos" element={<Produtos />} />
+              <Route path="/vendas" element={<Vendas />} />
+              <Route path="/assinaturas" element={<Assinaturas />} />
+              <Route path="/relatorios" element={<Relatorios />} />
+              <Route path="/afiliados" element={<Afiliados />} />
+              <Route path="/financeiro" element={<Financeiro />} />
+              <Route path="/integracoes" element={<Integracoes />} />
+              <Route path="/cupons" element={<Cupons />} />
+              <Route path="/configuracoes" element={<Configuracoes />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

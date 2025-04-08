@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import SidebarMenu from "./SidebarMenu";
-import { X, Menu, Bell, ChevronDown, User } from "lucide-react";
+import { X, Menu, Bell, ChevronDown, User, DollarSign } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
