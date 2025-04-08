@@ -1,5 +1,10 @@
+
 import { Calendar, CreditCard, DollarSign, Download, FileText, Plus, Search } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 
 const transacoes = [
   {
@@ -54,6 +59,7 @@ const transacoes = [
 
 const Financeiro = () => {
   const [periodoSelecionado, setPeriodoSelecionado] = useState("este_mes");
+  const [showSaqueDialog, setShowSaqueDialog] = useState(false);
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -63,35 +69,104 @@ const Financeiro = () => {
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="rounded-lg border border-border bg-card p-6">
-          <div className="flex flex-col">
-            <span className="text-muted-foreground text-sm">Saldo Disponível</span>
-            <span className="text-3xl font-bold mt-2">R$ 8.445,00</span>
-            <button className="mt-4 bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 text-sm">
-              Solicitar Saque
-            </button>
-          </div>
-        </div>
-        
-        <div className="rounded-lg border border-border bg-card p-6">
-          <div className="flex flex-col">
-            <span className="text-muted-foreground text-sm">Em Análise</span>
-            <span className="text-3xl font-bold mt-2">R$ 2.140,00</span>
-            <span className="mt-4 text-xs text-muted-foreground">
-              Valores que estarão disponíveis em até 14 dias
-            </span>
-          </div>
-        </div>
-        
-        <div className="rounded-lg border border-border bg-card p-6">
-          <div className="flex flex-col">
-            <span className="text-muted-foreground text-sm">Total Faturado (Mês)</span>
-            <span className="text-3xl font-bold mt-2">R$ 12.856,00</span>
-            <div className="mt-4 flex items-center text-green-500 text-sm">
-              <span>+15% em relação ao mês anterior</span>
+        <Card className="overflow-hidden border-border bg-gradient-to-br from-secondary/50 to-background shadow-md">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-normal text-muted-foreground">Saldo Disponível</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col">
+              <span className="text-3xl font-bold mt-1">R$ 8.445,00</span>
+              <Dialog open={showSaqueDialog} onOpenChange={setShowSaqueDialog}>
+                <DialogTrigger asChild>
+                  <Button className="mt-4 bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 text-sm w-full">
+                    Solicitar Saque
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Solicitar Saque</DialogTitle>
+                    <DialogDescription>
+                      Escolha a conta bancária e o valor para realizar seu saque.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4 py-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Conta Bancária</label>
+                      <select className="w-full p-2 rounded-md border border-border bg-secondary text-foreground">
+                        <option>Banco Itaú - Ag: 1234 | CC: 56789-0</option>
+                        <option>Adicionar Nova Conta</option>
+                      </select>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Valor (R$)</label>
+                      <input 
+                        type="text" 
+                        placeholder="0,00" 
+                        className="w-full p-2 rounded-md border border-border bg-secondary text-foreground"
+                      />
+                      <p className="text-xs text-muted-foreground">Saldo disponível: R$ 8.445,00</p>
+                    </div>
+                    <div className="flex justify-end space-x-2 mt-4">
+                      <Button variant="outline" onClick={() => setShowSaqueDialog(false)}>Cancelar</Button>
+                      <Button className="bg-highlight hover:bg-highlight-hover text-white">Confirmar Saque</Button>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
+        
+        <Card className="overflow-hidden border-border bg-gradient-to-br from-secondary/50 to-background shadow-md">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-normal text-muted-foreground">Em Análise</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col">
+              <span className="text-3xl font-bold mt-1">R$ 2.140,00</span>
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  <span className="mt-4 text-xs text-muted-foreground cursor-help inline-flex items-center">
+                    Valores que estarão disponíveis em até 14 dias
+                    <FileText className="h-3 w-3 ml-1" />
+                  </span>
+                </HoverCardTrigger>
+                <HoverCardContent className="w-80">
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-semibold">Detalhes dos valores em análise</h4>
+                    <ul className="text-xs space-y-1">
+                      <li className="flex justify-between">
+                        <span>Curso de Marketing Digital</span>
+                        <span>R$ 1.491,00</span>
+                      </li>
+                      <li className="flex justify-between">
+                        <span>Workshop de Vendas</span>
+                        <span>R$ 649,00</span>
+                      </li>
+                    </ul>
+                    <p className="text-xs text-muted-foreground">Valores já aprovados, mas ainda em período de segurança contra chargebacks.</p>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card className="overflow-hidden border-border bg-gradient-to-br from-secondary/50 to-background shadow-md">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-normal text-muted-foreground">Total Faturado (Mês)</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col">
+              <span className="text-3xl font-bold mt-1">R$ 12.856,00</span>
+              <div className="mt-4 flex items-center text-green-500 text-xs">
+                <span className="flex items-center gap-1">
+                  +15% em relação ao mês anterior
+                </span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
       
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -116,18 +191,18 @@ const Financeiro = () => {
             <option value="ultimos_3_meses">Últimos 3 Meses</option>
             <option value="personalizado">Período Personalizado</option>
           </select>
-          <button className="flex items-center gap-2 px-3 py-2 bg-secondary rounded-md border border-border hover:bg-secondary/80">
-            <Calendar className="h-4 w-4" />
+          <Button variant="outline" className="h-10">
+            <Calendar className="h-4 w-4 mr-2" />
             <span>Datas</span>
-          </button>
-          <button className="flex items-center gap-2 px-3 py-2 bg-highlight hover:bg-highlight-hover text-white rounded-md">
-            <Download className="h-4 w-4" />
+          </Button>
+          <Button className="bg-highlight hover:bg-highlight-hover text-white h-10">
+            <Download className="h-4 w-4 mr-2" />
             <span>Exportar</span>
-          </button>
+          </Button>
         </div>
       </div>
       
-      <div className="rounded-lg border border-border overflow-hidden">
+      <Card className="border-border overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -176,34 +251,38 @@ const Financeiro = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      </Card>
       
-      <div className="rounded-lg border border-border bg-card p-4">
-        <h3 className="text-lg font-medium mb-4">Contas Bancárias</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-4 border border-border rounded-md bg-secondary/20">
-            <div className="flex justify-between items-center">
-              <div>
-                <p className="font-medium">Banco Itaú</p>
-                <p className="text-sm text-muted-foreground mt-1">Agência: 1234 | Conta: 56789-0</p>
-                <p className="text-sm text-muted-foreground">João da Silva</p>
-              </div>
-              <div>
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/20 text-green-500">
-                  Principal
-                </span>
+      <Card className="border-border bg-card">
+        <CardHeader>
+          <CardTitle className="text-lg font-medium">Contas Bancárias</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-4 border border-border rounded-md bg-secondary/20 hover:bg-secondary/30 transition-colors">
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="font-medium">Banco Itaú</p>
+                  <p className="text-sm text-muted-foreground mt-1">Agência: 1234 | Conta: 56789-0</p>
+                  <p className="text-sm text-muted-foreground">João da Silva</p>
+                </div>
+                <div>
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/20 text-green-500">
+                    Principal
+                  </span>
+                </div>
               </div>
             </div>
+            
+            <div className="p-4 border border-dashed border-border rounded-md flex flex-col items-center justify-center hover:bg-secondary/10 transition-colors">
+              <button className="flex items-center gap-2 text-highlight">
+                <Plus className="h-5 w-5" />
+                <span>Adicionar Conta Bancária</span>
+              </button>
+            </div>
           </div>
-          
-          <div className="p-4 border border-dashed border-border rounded-md flex flex-col items-center justify-center">
-            <button className="flex items-center gap-2 text-highlight">
-              <Plus className="h-5 w-5" />
-              <span>Adicionar Conta Bancária</span>
-            </button>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

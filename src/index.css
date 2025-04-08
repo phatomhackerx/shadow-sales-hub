@@ -68,4 +68,39 @@
   .highlight-gradient {
     @apply bg-gradient-to-r from-blue-500 to-blue-600;
   }
+  
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-lg hover:border-highlight/20;
+  }
+  
+  .glow-effect {
+    @apply relative;
+  }
+  
+  .glow-effect::after {
+    @apply content-[''] absolute -inset-0.5 bg-gradient-to-r from-highlight to-blue-600 opacity-0 rounded-lg blur transition duration-200;
+    z-index: -1;
+  }
+  
+  .glow-effect:hover::after {
+    @apply opacity-20;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-br from-white to-white/70 bg-clip-text text-transparent;
+  }
+}
+
+/* Custom animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0.1);
+  }
+}
+
+.pulse-animation {
+  animation: pulse-glow 2s infinite;
 }
