@@ -1,5 +1,4 @@
-
-import { Calendar, CreditCard, DollarSign, Download, FileText, Search } from "lucide-react";
+import { Calendar, CreditCard, DollarSign, Download, FileText, Plus, Search } from "lucide-react";
 import { useState } from "react";
 
 const transacoes = [
