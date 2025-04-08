@@ -18,14 +18,21 @@ import Configuracoes from "./pages/Configuracoes";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
-  // Move the queryClient creation inside the component function
-  const queryClient = new QueryClient();
+  // Create a new QueryClient instance for each app render
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        retry: 1,
+      },
+    },
+  });
   
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Sonner />
+        <Sonner position="top-right" expand closeButton theme="dark" />
         <BrowserRouter>
           <Routes>
             <Route element={<AppLayout />}>
