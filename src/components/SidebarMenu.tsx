@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { 
   Home, 
   Package, 
-  ShoppingCart, 
+  ShoppingBag, 
   CreditCard, 
   BarChart2,
   Users,
@@ -32,8 +32,8 @@ const menuItems = [
     highlight: true
   },
   { 
-    title: "Minhas Vendas", 
-    icon: ShoppingCart, 
+    title: "Marketplace", 
+    icon: ShoppingBag, 
     path: "/vendas" 
   },
   {
