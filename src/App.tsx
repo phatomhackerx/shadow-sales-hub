@@ -16,6 +16,7 @@ import Financeiro from "./pages/Financeiro";
 import Integracoes from "./pages/Integracoes";
 import Cupons from "./pages/Cupons";
 import Configuracoes from "./pages/Configuracoes";
+import BotsAI from "./pages/BotsAI";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
@@ -58,6 +59,7 @@ const App = () => {
               <Route path="/" element={<Dashboard />} />
               <Route path="/produtos" element={<Produtos />} />
               <Route path="/vendas" element={<Vendas />} />
+              <Route path="/botsai" element={<BotsAI />} />
               <Route path="/assinaturas" element={<Assinaturas />} />
               <Route path="/relatorios" element={<Relatorios />} />
               <Route path="/afiliados" element={<Afiliados />} />

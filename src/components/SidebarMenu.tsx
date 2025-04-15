@@ -11,7 +11,8 @@ import {
   Wallet, 
   Share2, 
   Tag,
-  Settings
+  Settings,
+  Bot
 } from "lucide-react";
 
 interface SidebarMenuProps {
@@ -33,6 +34,12 @@ const menuItems = [
     title: "Minhas Vendas", 
     icon: ShoppingCart, 
     path: "/vendas" 
+  },
+  {
+    title: "BotsAI",
+    icon: Bot,
+    path: "/botsai",
+    highlight: true
   },
   { 
     title: "Assinaturas", 
@@ -87,7 +94,8 @@ const SidebarMenu = ({ onItemClick }: SidebarMenuProps) => {
               "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-all duration-300",
               isActive 
                 ? "bg-sidebar-accent text-highlight font-medium glow-effect" 
-                : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground",
+              item.highlight && !isActive && "text-highlight/90 font-medium"
             )}
             style={{ 
               animationDelay: `${index * 0.05}s`,
@@ -96,9 +104,15 @@ const SidebarMenu = ({ onItemClick }: SidebarMenuProps) => {
           >
             <item.icon className={cn(
               "h-5 w-5 transition-transform",
-              isActive && "text-highlight subtle-bounce-animation"
+              isActive && "text-highlight subtle-bounce-animation",
+              item.highlight && !isActive && "text-highlight/90"
             )} />
             <span>{item.title}</span>
+            {item.highlight && !isActive && (
+              <span className="ml-auto bg-highlight/20 text-highlight text-xs px-1.5 py-0.5 rounded-full">
+                Novo
+              </span>
+            )}
           </Link>
         );
       })}
