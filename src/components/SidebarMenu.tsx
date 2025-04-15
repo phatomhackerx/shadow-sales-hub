@@ -28,7 +28,8 @@ const menuItems = [
   { 
     title: "Produtos", 
     icon: Package, 
-    path: "/produtos" 
+    path: "/produtos",
+    highlight: true
   },
   { 
     title: "Minhas Vendas", 
@@ -38,8 +39,7 @@ const menuItems = [
   {
     title: "BotsAI",
     icon: Bot,
-    path: "/botsai",
-    highlight: true
+    path: "/botsai"
   },
   { 
     title: "Assinaturas", 

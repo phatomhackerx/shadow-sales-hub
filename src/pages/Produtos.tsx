@@ -1,5 +1,12 @@
 
-import { Plus, Search } from "lucide-react";
+import { useState } from "react";
+import { Plus, Search, Filter, FileText, Edit, Trash2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Select } from "@/components/ui/select";
+import { useToast } from "@/components/ui/use-toast";
 
 const produtos = [
   {
@@ -41,37 +48,83 @@ const produtos = [
     vendas: 203,
     revenue: "R$ 19.691,00",
     status: "Ativo"
+  },
+  {
+    id: 6,
+    nome: "Curso Mindset Empreendedor",
+    preco: "R$ 297,00",
+    vendas: 53,
+    revenue: "R$ 15.741,00",
+    status: "Em Revisão"
   }
 ];
 
 const Produtos = () => {
+  const { toast } = useToast();
+  const [filtroStatus, setFiltroStatus] = useState("todos");
+  const [pesquisa, setPesquisa] = useState("");
+  
+  const produtosFiltrados = produtos.filter(produto => {
+    // Filtro por status
+    if (filtroStatus !== "todos" && produto.status.toLowerCase() !== filtroStatus.toLowerCase()) {
+      return false;
+    }
+    
+    // Filtro por pesquisa
+    if (pesquisa && !produto.nome.toLowerCase().includes(pesquisa.toLowerCase())) {
+      return false;
+    }
+    
+    return true;
+  });
+  
+  const handleDeleteProduct = (id: number) => {
+    toast({
+      title: "Produto excluído",
+      description: "O produto foi excluído com sucesso.",
+    });
+  };
+  
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Produtos</h1>
-          <p className="text-muted-foreground">Gerencie seus produtos e serviços</p>
+          <p className="text-muted-foreground">Gerencie seus produtos e serviços digitais</p>
         </div>
-        <button className="bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 flex items-center gap-2">
-          <Plus className="h-4 w-4" />
-          <span>Novo Produto</span>
-        </button>
+        <Link to="/produtos/novo">
+          <Button className="bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 flex items-center gap-2 interactive-element">
+            <Plus className="h-4 w-4" />
+            <span>Novo Produto</span>
+          </Button>
+        </Link>
       </div>
       
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
-        <div className="relative">
+        <div className="relative w-full sm:w-auto">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input 
             type="text" 
             placeholder="Buscar produtos..." 
             className="pl-10 pr-4 py-2 w-full sm:w-80 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight"
+            value={pesquisa}
+            onChange={(e) => setPesquisa(e.target.value)}
           />
         </div>
-        <div className="flex gap-2">
-          <select className="px-3 py-2 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight">
+        <div className="flex flex-wrap gap-2">
+          <div className="flex items-center gap-2 px-3 py-2 bg-secondary rounded-md border border-border hover:bg-secondary/80">
+            <Filter className="h-4 w-4" />
+            <span>Filtros</span>
+          </div>
+          <select 
+            className="px-3 py-2 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight"
+            value={filtroStatus}
+            onChange={(e) => setFiltroStatus(e.target.value)}
+          >
             <option value="todos">Todos os status</option>
             <option value="ativo">Ativo</option>
             <option value="inativo">Inativo</option>
+            <option value="em revisão">Em Revisão</option>
           </select>
           <select className="px-3 py-2 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight">
             <option value="recentes">Mais recentes</option>
@@ -81,58 +134,87 @@ const Produtos = () => {
         </div>
       </div>
       
-      <div className="rounded-lg border border-border overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="bg-secondary/30">
-                <th className="text-left p-4 text-sm font-medium text-muted-foreground">Nome</th>
-                <th className="text-left p-4 text-sm font-medium text-muted-foreground">Preço</th>
-                <th className="text-left p-4 text-sm font-medium text-muted-foreground">Vendas</th>
-                <th className="text-left p-4 text-sm font-medium text-muted-foreground">Receita</th>
-                <th className="text-left p-4 text-sm font-medium text-muted-foreground">Status</th>
-                <th className="text-left p-4 text-sm font-medium text-muted-foreground">Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {produtos.map((produto) => (
-                <tr key={produto.id} className="border-t border-border hover:bg-secondary/10">
-                  <td className="p-4">
-                    <div className="font-medium">{produto.nome}</div>
-                  </td>
-                  <td className="p-4 text-sm">{produto.preco}</td>
-                  <td className="p-4 text-sm">{produto.vendas}</td>
-                  <td className="p-4 text-sm">{produto.revenue}</td>
-                  <td className="p-4">
-                    <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                      produto.status === "Ativo" 
-                        ? "bg-green-500/20 text-green-500" 
-                        : "bg-red-500/20 text-red-500"
-                    }`}>
-                      {produto.status}
-                    </span>
-                  </td>
-                  <td className="p-4">
-                    <div className="flex space-x-2">
-                      <button className="text-sm text-highlight hover:underline">Editar</button>
-                      <button className="text-sm text-red-500 hover:underline">Excluir</button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {produtosFiltrados.map((produto) => (
+          <Card key={produto.id} className="border border-border hover:border-highlight/30 transition-all duration-300 depth-card">
+            <CardContent className="p-0">
+              <div className="p-4 flex justify-between items-start border-b border-border">
+                <div>
+                  <h3 className="font-medium text-lg">{produto.nome}</h3>
+                  <p className="text-highlight text-sm font-medium mt-1">{produto.preco}</p>
+                </div>
+                <Badge className={
+                  produto.status === "Ativo" 
+                    ? "bg-green-500/20 text-green-500 hover:bg-green-500/30" 
+                    : produto.status === "Inativo"
+                    ? "bg-red-500/20 text-red-500 hover:bg-red-500/30"
+                    : "bg-yellow-500/20 text-yellow-500 hover:bg-yellow-500/30"
+                }>
+                  {produto.status}
+                </Badge>
+              </div>
+              <div className="p-4 grid grid-cols-2 gap-2 text-sm">
+                <div>
+                  <p className="text-muted-foreground">Vendas</p>
+                  <p className="font-medium">{produto.vendas}</p>
+                </div>
+                <div>
+                  <p className="text-muted-foreground">Receita</p>
+                  <p className="font-medium">{produto.revenue}</p>
+                </div>
+              </div>
+              <div className="p-4 border-t border-border flex justify-between items-center">
+                <div className="flex space-x-2">
+                  <Link to={`/produtos/${produto.id}`}>
+                    <Button variant="outline" size="sm" className="h-9 px-3 icon-interactive">
+                      <FileText className="h-4 w-4" />
+                      <span className="ml-2">Detalhes</span>
+                    </Button>
+                  </Link>
+                </div>
+                <div className="flex space-x-2">
+                  <Link to={`/produtos/editar/${produto.id}`}>
+                    <Button variant="ghost" size="icon" className="h-8 w-8 text-highlight icon-interactive">
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="h-8 w-8 text-red-500 hover:text-red-600 icon-interactive"
+                    onClick={() => handleDeleteProduct(produto.id)}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
       
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">Mostrando 1-5 de 5 produtos</p>
-        <div className="flex space-x-2">
-          <button className="px-3 py-1 rounded-md bg-secondary text-foreground" disabled>Anterior</button>
-          <button className="px-3 py-1 rounded-md bg-highlight text-white">1</button>
-          <button className="px-3 py-1 rounded-md bg-secondary text-foreground" disabled>Próximo</button>
+      {produtosFiltrados.length === 0 && (
+        <div className="text-center p-8 border border-dashed border-border rounded-lg">
+          <p className="text-muted-foreground">Nenhum produto encontrado.</p>
+          <Link to="/produtos/novo">
+            <Button className="mt-4 bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 flex items-center gap-2 mx-auto interactive-element">
+              <Plus className="h-4 w-4" />
+              <span>Criar Novo Produto</span>
+            </Button>
+          </Link>
         </div>
-      </div>
+      )}
+      
+      {produtosFiltrados.length > 0 && (
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-muted-foreground">Mostrando {produtosFiltrados.length} de {produtos.length} produtos</p>
+          <div className="flex space-x-2">
+            <Button variant="outline" size="sm" disabled>Anterior</Button>
+            <Button variant="default" size="sm" className="bg-highlight hover:bg-highlight-hover">1</Button>
+            <Button variant="outline" size="sm" disabled>Próximo</Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
