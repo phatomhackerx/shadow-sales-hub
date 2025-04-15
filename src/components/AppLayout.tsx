@@ -31,6 +31,13 @@ const AppLayout = () => {
   
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
+  // Fechar sidebar ao clicar em um link do menu (em dispositivos móveis)
+  const handleMenuItemClick = () => {
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -44,9 +51,18 @@ const AppLayout = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Fechar sidebar quando a tela é redimensionada para desktop
+  useEffect(() => {
+    if (!isMobile) {
+      setSidebarOpen(false);
+    }
+  }, [isMobile]);
+
   const handleProfileAction = (action: string) => {
     toast.info(`Ação: ${action}`, {
-      description: "Funcionalidade em desenvolvimento"
+      description: "Funcionalidade em desenvolvimento",
+      position: "bottom-right",
+      duration: 3000,
     });
   };
 
@@ -60,12 +76,12 @@ const AppLayout = () => {
         )}
       >
         <div className="flex h-16 items-center px-6 border-b border-sidebar-border bg-sidebar">
-          <h1 className="text-xl font-bold text-white bg-gradient-to-r from-highlight to-blue-400 bg-clip-text text-transparent">
+          <h1 className="text-xl font-bold text-white bg-gradient-to-r from-highlight to-blue-400 bg-clip-text text-transparent gradient-animation">
             VENDAS HUB
           </h1>
         </div>
         <div className="flex flex-col h-[calc(100%-4rem)] p-4 overflow-y-auto scrollbar-hide">
-          <SidebarMenu />
+          <SidebarMenu onItemClick={handleMenuItemClick} />
         </div>
       </aside>
 
@@ -81,38 +97,38 @@ const AppLayout = () => {
       <main 
         className={cn(
           "flex flex-col flex-1 overflow-y-auto transition-all duration-300 ease-in-out",
-          isMobile ? "w-full" : sidebarOpen ? "ml-64" : "ml-64"
+          isMobile ? "w-full" : "ml-64"
         )}
       >
         {/* Top header */}
         <header className={cn(
-          "sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/40 px-6 transition-all duration-300 ease-in-out",
+          "sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/40 px-4 sm:px-6 transition-all duration-300 ease-in-out",
           scrolled ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-background"
         )}>
           <div className="flex items-center">
             <button 
-              className="inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-sidebar-accent mr-2 transition-colors duration-200"
+              className="inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-sidebar-accent mr-2 transition-colors duration-200 icon-interactive"
               onClick={toggleSidebar}
+              aria-label="Toggle sidebar"
             >
               {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              <span className="sr-only">Toggle sidebar</span>
             </button>
             
             <nav className="hidden md:flex items-center space-x-4">
               <button 
-                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors duration-200"
+                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors duration-200 soft-hover px-3 py-2 rounded-md"
                 onClick={() => handleProfileAction("Home")}
               >
                 Home
               </button>
               <button 
-                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors duration-200"
+                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors duration-200 soft-hover px-3 py-2 rounded-md"
                 onClick={() => handleProfileAction("Suporte")}
               >
                 Suporte
               </button>
               <button 
-                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors duration-200"
+                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors duration-200 soft-hover px-3 py-2 rounded-md"
                 onClick={() => handleProfileAction("Documentação")}
               >
                 Documentação
@@ -120,19 +136,20 @@ const AppLayout = () => {
             </nav>
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Dialog>
               <DialogTrigger asChild>
                 <Button 
                   variant="outline" 
                   size="icon" 
-                  className="relative hover:bg-secondary/50 transition-colors duration-200"
+                  className="relative hover:bg-secondary/50 transition-colors duration-200 icon-interactive"
+                  aria-label="Notificações"
                 >
                   <Bell className="h-[1.2rem] w-[1.2rem]" />
                   <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-highlight text-[10px] text-white pulse-animation">3</span>
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
+              <DialogContent className="sm:max-w-md depth-card slide-up-animation">
                 <DialogHeader>
                   <DialogTitle>Notificações</DialogTitle>
                   <DialogDescription>
@@ -141,7 +158,11 @@ const AppLayout = () => {
                 </DialogHeader>
                 <div className="py-4 space-y-4 max-h-[60vh] overflow-y-auto scrollbar-hide">
                   {[...Array(5)].map((_, i) => (
-                    <div key={i} className="flex items-start gap-3 p-3 rounded-md hover:bg-secondary/30 transition-colors">
+                    <div 
+                      key={i} 
+                      className="flex items-start gap-3 p-3 rounded-md hover:bg-secondary/30 transition-colors soft-hover"
+                      style={{ animationDelay: `${i * 0.1}s` }} 
+                    >
                       <div className={cn(
                         "p-2 rounded-full", 
                         i % 2 === 0 
@@ -171,26 +192,26 @@ const AppLayout = () => {
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className="flex items-center gap-2 rounded-full bg-secondary/30 p-1 pl-3 cursor-pointer hover:bg-secondary/50 transition-colors">
-                  <span className="text-sm font-medium text-white">João Silva</span>
-                  <div className="h-8 w-8 rounded-full bg-gradient-to-br from-highlight to-blue-600 flex items-center justify-center">
+                <div className="flex items-center gap-2 rounded-full bg-secondary/30 p-1 pl-3 cursor-pointer hover:bg-secondary/50 transition-colors interactive-element">
+                  <span className="text-sm font-medium text-white hidden sm:inline-block">João Silva</span>
+                  <div className="h-8 w-8 rounded-full bg-gradient-to-br from-highlight to-blue-600 flex items-center justify-center gradient-animation">
                     <span className="text-sm font-medium text-white">JS</span>
                   </div>
-                  <ChevronDown className="h-4 w-4 ml-1 text-muted-foreground" />
+                  <ChevronDown className="h-4 w-4 ml-1 text-muted-foreground sm:inline-block hidden" />
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuContent align="end" className="w-56 dropdown-content fade-in-scale-animation">
                 <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem 
-                  className="cursor-pointer flex items-center" 
+                  className="cursor-pointer flex items-center soft-hover" 
                   onClick={() => handleProfileAction("Perfil")}
                 >
                   <User className="mr-2 h-4 w-4" />
                   <span>Perfil</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem 
-                  className="cursor-pointer flex items-center" 
+                  className="cursor-pointer flex items-center soft-hover" 
                   onClick={() => handleProfileAction("Configurações")}
                 >
                   <Settings className="mr-2 h-4 w-4" />
@@ -198,7 +219,7 @@ const AppLayout = () => {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem 
-                  className="cursor-pointer flex items-center text-red-400 focus:text-red-400"
+                  className="cursor-pointer flex items-center text-red-400 focus:text-red-400 soft-hover"
                   onClick={() => handleProfileAction("Sair")}
                 >
                   <LogOut className="mr-2 h-4 w-4" />
@@ -210,8 +231,10 @@ const AppLayout = () => {
         </header>
         
         {/* Page content */}
-        <div className="flex-1 p-6">
-          <Outlet />
+        <div className="flex-1 p-4 sm:p-6 overflow-x-hidden">
+          <div className="slide-up-animation">
+            <Outlet />
+          </div>
         </div>
       </main>
     </div>

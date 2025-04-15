@@ -14,6 +14,10 @@ import {
   Settings
 } from "lucide-react";
 
+interface SidebarMenuProps {
+  onItemClick?: () => void;
+}
+
 const menuItems = [
   { 
     title: "Dashboard", 
@@ -67,25 +71,33 @@ const menuItems = [
   }
 ];
 
-const SidebarMenu = () => {
+const SidebarMenu = ({ onItemClick }: SidebarMenuProps) => {
   const location = useLocation();
   
   return (
     <div className="flex flex-col space-y-1">
-      {menuItems.map((item) => {
+      {menuItems.map((item, index) => {
         const isActive = location.pathname === item.path;
         return (
           <Link
             key={item.path}
             to={item.path}
+            onClick={onItemClick}
             className={cn(
-              "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
+              "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-all duration-300",
               isActive 
-                ? "bg-sidebar-accent text-highlight font-medium" 
+                ? "bg-sidebar-accent text-highlight font-medium glow-effect" 
                 : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
             )}
+            style={{ 
+              animationDelay: `${index * 0.05}s`,
+              transform: isActive ? 'translateX(4px)' : 'translateX(0)',
+            }}
           >
-            <item.icon className="h-5 w-5" />
+            <item.icon className={cn(
+              "h-5 w-5 transition-transform",
+              isActive && "text-highlight subtle-bounce-animation"
+            )} />
             <span>{item.title}</span>
           </Link>
         );

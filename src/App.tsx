@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import AppLayout from "./components/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Produtos from "./pages/Produtos";
@@ -18,8 +19,8 @@ import Configuracoes from "./pages/Configuracoes";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
-  // Create a new QueryClient instance for each app render
-  const queryClient = new QueryClient({
+  // Create a QueryClient instance for React Query
+  const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
@@ -28,14 +29,14 @@ const App = () => {
         gcTime: 10 * 60 * 1000, // 10 minutes
       },
     },
-  });
+  }));
   
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner 
-          position="top-right" 
+          position="bottom-right" 
           expand 
           closeButton 
           theme="dark" 
@@ -45,7 +46,10 @@ const App = () => {
               background: 'hsl(var(--secondary))',
               border: '1px solid hsl(var(--border))',
               color: 'hsl(var(--foreground))',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
             },
+            className: "interactive-element",
+            duration: 4000,
           }} 
         />
         <BrowserRouter>
