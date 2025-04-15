@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Smartphone, Desktop, Paintbrush, Save, Eye, Code, Layout, Share2 } from "lucide-react";
+import { ArrowLeft, Smartphone, Monitor, Paintbrush, Save, Eye, Code, Layout, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
@@ -162,7 +162,7 @@ const CheckoutBuilder = () => {
                   className={`rounded-r-none ${viewMode === 'desktop' ? 'bg-muted' : ''}`}
                   onClick={() => setViewMode('desktop')}
                 >
-                  <Desktop className="h-4 w-4 mr-2" />
+                  <Monitor className="h-4 w-4 mr-2" />
                   Desktop
                 </Button>
                 <Button 
