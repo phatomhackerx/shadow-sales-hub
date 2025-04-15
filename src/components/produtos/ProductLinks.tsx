@@ -2,67 +2,21 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Link2, Copy, ArrowUpRight, ExternalLink, FileBarChart, Eye, Clock, MapPin, DeviceTablet, ChevronDown, ChevronUp } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-
-interface LinkItem {
-  id: number;
-  name: string;
-  url: string;
-  clicks: number;
-  lastUsed: string;
-}
+import { CopyIcon, ExternalLink, Smartphone, Tablet, Download, Share2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const ProductLinks = () => {
-  const { toast } = useToast();
-  const [isSmartLinkOpen, setIsSmartLinkOpen] = useState(false);
+  const [copied, setCopied] = useState<string | null>(null);
   
-  const links: LinkItem[] = [
-    {
-      id: 1,
-      name: "Página de Vendas",
-      url: "https://cakto.com.br/produto/curso-marketing-digital",
-      clicks: 347,
-      lastUsed: "2023-04-12"
-    },
-    {
-      id: 2,
-      name: "Checkout Direto",
-      url: "https://cakto.com.br/checkout/curso-marketing-digital",
-      clicks: 129,
-      lastUsed: "2023-04-11"
-    },
-    {
-      id: 3,
-      name: "Upsell",
-      url: "https://cakto.com.br/upsell/curso-marketing-digital",
-      clicks: 86,
-      lastUsed: "2023-04-10"
-    },
-    {
-      id: 4,
-      name: "Link de Afiliado",
-      url: "https://cakto.com.br/produto/curso-marketing-digital?ref=seu-codigo",
-      clicks: 204,
-      lastUsed: "2023-04-12"
-    },
-    {
-      id: 5,
-      name: "Link para Desconto (50%)",
-      url: "https://cakto.com.br/produto/curso-marketing-digital?cupom=PROMO50",
-      clicks: 63,
-      lastUsed: "2023-04-09"
-    }
-  ];
-  
-  const copyLink = (url: string) => {
-    navigator.clipboard.writeText(url);
+  const handleCopy = (text: string, type: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(type);
     
-    toast({
-      title: "Link copiado",
-      description: "Link copiado para a área de transferência.",
-    });
+    setTimeout(() => {
+      setCopied(null);
+    }, 2000);
   };
   
   return (
@@ -70,160 +24,119 @@ const ProductLinks = () => {
       <Card>
         <CardHeader>
           <CardTitle>Links do Produto</CardTitle>
-          <CardDescription>
-            Todos os links relacionados ao seu produto para compartilhar e promover
-          </CardDescription>
+          <CardDescription>Copie e compartilhe os links do seu produto</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {links.map((link) => (
-              <div key={link.id} className="border border-border rounded-md p-4 hover:border-highlight/30 transition-all duration-200">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h4 className="font-medium flex items-center text-highlight">
-                      <Link2 className="h-4 w-4 mr-2" />
-                      {link.name}
-                    </h4>
-                    <p className="text-xs text-muted-foreground mt-1 truncate w-44">
-                      {link.url}
-                    </p>
-                  </div>
-                  <div className="flex">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => copyLink(link.url)}
-                      className="h-8 w-8 text-muted-foreground"
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => window.open(link.url, "_blank")}
-                      className="h-8 w-8 text-muted-foreground"
-                    >
-                      <ArrowUpRight className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between mt-3 pt-3 border-t border-border text-xs text-muted-foreground">
-                  <div>{link.clicks} cliques</div>
-                  <div>Usado em: {new Date(link.lastUsed).toLocaleDateString()}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <Collapsible
-            open={isSmartLinkOpen}
-            onOpenChange={setIsSmartLinkOpen}
-            className="border border-border rounded-md overflow-hidden"
-          >
-            <CollapsibleTrigger className="flex items-center justify-between w-full p-4 text-left">
-              <div className="flex items-center">
-                <ExternalLink className="h-5 w-5 mr-2 text-highlight" />
-                <div>
-                  <h3 className="font-medium">Smart Links</h3>
-                  <p className="text-xs text-muted-foreground">
-                    Links inteligentes com redirecionamento baseado em condições
-                  </p>
-                </div>
-              </div>
-              {isSmartLinkOpen ? (
-                <ChevronUp className="h-5 w-5" />
-              ) : (
-                <ChevronDown className="h-5 w-5" />
-              )}
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <div className="p-4 pt-0 border-t border-border space-y-4">
-                <div>
-                  <h4 className="text-sm font-medium mb-2">
-                    Links de Redirecionamento Inteligente
-                  </h4>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between bg-secondary/30 rounded-md p-3">
-                      <div className="flex items-center">
-                        <DeviceTablet className="h-4 w-4 mr-2 text-muted-foreground" />
-                        <span className="text-sm">Redirecionamento por Dispositivo</span>
-                      </div>
-                      <Button size="sm" variant="outline">
-                        <Link2 className="h-3 w-3 mr-1" />
-                        Criar Link
-                      </Button>
-                    </div>
-                    
-                    <div className="flex items-center justify-between bg-secondary/30 rounded-md p-3">
-                      <div className="flex items-center">
-                        <MapPin className="h-4 w-4 mr-2 text-muted-foreground" />
-                        <span className="text-sm">Redirecionamento por Localização</span>
-                      </div>
-                      <Button size="sm" variant="outline">
-                        <Link2 className="h-3 w-3 mr-1" />
-                        Criar Link
-                      </Button>
-                    </div>
-                    
-                    <div className="flex items-center justify-between bg-secondary/30 rounded-md p-3">
-                      <div className="flex items-center">
-                        <Clock className="h-4 w-4 mr-2 text-muted-foreground" />
-                        <span className="text-sm">Redirecionamento por Horário</span>
-                      </div>
-                      <Button size="sm" variant="outline">
-                        <Link2 className="h-3 w-3 mr-1" />
-                        Criar Link
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-                
-                <div>
-                  <h4 className="text-sm font-medium flex items-center mb-2">
-                    <FileBarChart className="h-4 w-4 mr-1" />
-                    Estatísticas Avançadas
-                  </h4>
-                  <p className="text-xs text-muted-foreground mb-3">
-                    Os smart links fornecem estatísticas detalhadas de conversão e comportamento dos usuários
-                  </p>
-                  <Button variant="outline" size="sm">
-                    <Eye className="h-4 w-4 mr-2" />
-                    Ver Analytics
+          <Tabs defaultValue="sales">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="sales">Página de Vendas</TabsTrigger>
+              <TabsTrigger value="checkout">Checkout</TabsTrigger>
+              <TabsTrigger value="thankyou">Página de Agradecimento</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="sales" className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="sales-page">Link da Página de Vendas</Label>
+                <div className="flex space-x-2">
+                  <Input 
+                    id="sales-page" 
+                    readOnly 
+                    value="https://seudominio.com.br/vendas/curso-marketing-digital" 
+                  />
+                  <Button 
+                    variant="outline" 
+                    onClick={() => handleCopy("https://seudominio.com.br/vendas/curso-marketing-digital", "sales")}
+                  >
+                    {copied === "sales" ? <span className="text-green-500">Copiado!</span> : <CopyIcon className="h-4 w-4" />}
                   </Button>
                 </div>
               </div>
-            </CollapsibleContent>
-          </Collapsible>
-          
-          <div className="bg-secondary/30 border border-border rounded-md p-4">
-            <h3 className="font-medium">Parâmetros de UTM</h3>
-            <p className="text-sm text-muted-foreground mt-1 mb-4">
-              Adicione parâmetros UTM aos seus links para rastrear suas campanhas
-            </p>
+              
+              <div className="flex items-center justify-between border rounded-lg p-3 mt-4">
+                <div className="flex items-center space-x-3">
+                  <Smartphone className="h-5 w-5 text-muted-foreground" />
+                  <div>
+                    <p className="font-medium">Visualizar no Mobile</p>
+                    <p className="text-sm text-muted-foreground">Veja como a página fica em dispositivos móveis</p>
+                  </div>
+                </div>
+                <Button variant="outline" size="sm">
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  Abrir
+                </Button>
+              </div>
+              
+              <div className="flex items-center justify-between border rounded-lg p-3">
+                <div className="flex items-center space-x-3">
+                  <Tablet className="h-5 w-5 text-muted-foreground" />
+                  <div>
+                    <p className="font-medium">Visualizar no Tablet</p>
+                    <p className="text-sm text-muted-foreground">Veja como a página fica em tablets</p>
+                  </div>
+                </div>
+                <Button variant="outline" size="sm">
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  Abrir
+                </Button>
+              </div>
+            </TabsContent>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
-              <div className="flex items-center justify-between">
-                <span>UTM Source</span>
-                <code className="text-xs bg-secondary py-1 px-2 rounded">utm_source=instagram</code>
+            <TabsContent value="checkout" className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="checkout-page">Link Direto para Checkout</Label>
+                <div className="flex space-x-2">
+                  <Input 
+                    id="checkout-page" 
+                    readOnly 
+                    value="https://seudominio.com.br/checkout/curso-marketing-digital" 
+                  />
+                  <Button 
+                    variant="outline" 
+                    onClick={() => handleCopy("https://seudominio.com.br/checkout/curso-marketing-digital", "checkout")}
+                  >
+                    {copied === "checkout" ? <span className="text-green-500">Copiado!</span> : <CopyIcon className="h-4 w-4" />}
+                  </Button>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span>UTM Medium</span>
-                <code className="text-xs bg-secondary py-1 px-2 rounded">utm_medium=social</code>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <Button variant="outline" className="h-auto py-3 justify-start space-x-3">
+                  <Download className="h-5 w-5" />
+                  <div className="text-left">
+                    <p className="font-medium">Gerar QR Code</p>
+                    <p className="text-xs text-muted-foreground">Para usar em materiais impressos</p>
+                  </div>
+                </Button>
+                
+                <Button variant="outline" className="h-auto py-3 justify-start space-x-3">
+                  <Share2 className="h-5 w-5" />
+                  <div className="text-left">
+                    <p className="font-medium">Compartilhar</p>
+                    <p className="text-xs text-muted-foreground">Enviar para redes sociais</p>
+                  </div>
+                </Button>
               </div>
-              <div className="flex items-center justify-between">
-                <span>UTM Campaign</span>
-                <code className="text-xs bg-secondary py-1 px-2 rounded">utm_campaign=spring_sale</code>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>UTM Content</span>
-                <code className="text-xs bg-secondary py-1 px-2 rounded">utm_content=story</code>
-              </div>
-            </div>
+            </TabsContent>
             
-            <p className="text-xs text-muted-foreground mt-4">
-              Exemplo: https://cakto.com.br/produto/curso-marketing-digital?utm_source=instagram&utm_medium=social
-            </p>
-          </div>
+            <TabsContent value="thankyou" className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="thankyou-page">Link da Página de Agradecimento</Label>
+                <div className="flex space-x-2">
+                  <Input 
+                    id="thankyou-page" 
+                    readOnly 
+                    value="https://seudominio.com.br/obrigado/curso-marketing-digital" 
+                  />
+                  <Button 
+                    variant="outline" 
+                    onClick={() => handleCopy("https://seudominio.com.br/obrigado/curso-marketing-digital", "thankyou")}
+                  >
+                    {copied === "thankyou" ? <span className="text-green-500">Copiado!</span> : <CopyIcon className="h-4 w-4" />}
+                  </Button>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         </CardContent>
       </Card>
     </div>

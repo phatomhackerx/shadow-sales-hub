@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Plus, Search, Filter, FileText, Edit, Trash2 } from "lucide-react";
+import { Plus, Search, Filter, FileText, Edit, Trash2, Layout } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -163,30 +163,36 @@ const Produtos = () => {
                   <p className="font-medium">{produto.revenue}</p>
                 </div>
               </div>
-              <div className="p-4 border-t border-border flex justify-between items-center">
-                <div className="flex space-x-2">
+              <div className="p-4 border-t border-border flex flex-col space-y-2">
+                <div className="flex justify-between items-center">
                   <Link to={`/produtos/${produto.id}`}>
                     <Button variant="outline" size="sm" className="h-9 px-3 icon-interactive">
                       <FileText className="h-4 w-4" />
                       <span className="ml-2">Detalhes</span>
                     </Button>
                   </Link>
-                </div>
-                <div className="flex space-x-2">
-                  <Link to={`/produtos/editar/${produto.id}`}>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 text-highlight icon-interactive">
-                      <Edit className="h-4 w-4" />
+                  <div className="flex space-x-2">
+                    <Link to={`/produtos/editar/${produto.id}`}>
+                      <Button variant="ghost" size="icon" className="h-8 w-8 text-highlight icon-interactive">
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="h-8 w-8 text-red-500 hover:text-red-600 icon-interactive"
+                      onClick={() => handleDeleteProduct(produto.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
                     </Button>
-                  </Link>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="h-8 w-8 text-red-500 hover:text-red-600 icon-interactive"
-                    onClick={() => handleDeleteProduct(produto.id)}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                  </div>
                 </div>
+                <Link to={`/produtos/${produto.id}/checkout-builder`}>
+                  <Button variant="outline" size="sm" className="w-full h-9 border-highlight/50 text-highlight hover:bg-highlight/10 icon-interactive">
+                    <Layout className="h-4 w-4 mr-2" />
+                    Checkout Builder
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>

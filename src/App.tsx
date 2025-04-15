@@ -9,6 +9,7 @@ import AppLayout from "./components/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Produtos from "./pages/Produtos";
 import ProdutoCadastro from "./pages/ProdutoCadastro";
+import CheckoutBuilder from "./pages/CheckoutBuilder";
 import Vendas from "./pages/Vendas";
 import Assinaturas from "./pages/Assinaturas";
 import Relatorios from "./pages/Relatorios";
@@ -62,6 +63,7 @@ const App = () => {
               <Route path="/produtos/novo" element={<ProdutoCadastro />} />
               <Route path="/produtos/:id" element={<ProdutoCadastro />} />
               <Route path="/produtos/editar/:id" element={<ProdutoCadastro />} />
+              <Route path="/produtos/:id/checkout-builder" element={<CheckoutBuilder />} />
               <Route path="/vendas" element={<Vendas />} />
               <Route path="/botsai" element={<BotsAI />} />
               <Route path="/assinaturas" element={<Assinaturas />} />
