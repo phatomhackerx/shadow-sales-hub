@@ -1,10 +1,9 @@
-
 import { 
   Calendar, Copy, Plus, Search, Tag, Ticket, BadgePercent, BarChart2, RefreshCcw, 
   Package, TicketCheck, ExternalLink, Filter
 } from "lucide-react";
 import { useState } from "react";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/use-toast";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -408,12 +407,10 @@ const Cupons = () => {
                   <div className="p-4 border-t border-border">
                     <h4 className="text-sm font-medium mb-2">Cupons ativos:</h4>
                     <div className="flex flex-wrap gap-2">
-                      {index => (
-                        <Badge className="bg-purple-500/20 text-purple-500 flex items-center gap-1">
-                          <TicketCheck className="h-3 w-3" />
-                          PROMO10
-                        </Badge>
-                      )}
+                      <Badge className="bg-purple-500/20 text-purple-500 flex items-center gap-1">
+                        <TicketCheck className="h-3 w-3" />
+                        PROMO10
+                      </Badge>
                     </div>
                   </div>
                 </CardContent>
