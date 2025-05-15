@@ -3,7 +3,7 @@ import {
   Package, TicketCheck, ExternalLink, Filter
 } from "lucide-react";
 import { useState } from "react";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -122,10 +122,14 @@ const Cupons = () => {
   const [abaAtiva, setAbaAtiva] = useState("meus_cupons");
   const [pesquisa, setPesquisa] = useState("");
   const [tipoCupomSelecionado, setTipoCupomSelecionado] = useState("todos");
+  const { toast } = useToast();
   
   const copiarCodigo = (codigo: string) => {
     navigator.clipboard.writeText(codigo);
-    toast.success("Código copiado para a área de transferência");
+    toast({
+      title: "Código copiado",
+      description: "Código copiado para a área de transferência",
+    });
   };
 
   const filtrarCupons = () => {
@@ -397,7 +401,10 @@ const Cupons = () => {
                         variant="default" 
                         size="icon"
                         className="bg-highlight hover:bg-highlight-hover"
-                        onClick={() => toast.success("Cupom aplicado ao produto")}
+                        onClick={() => toast({
+                          title: "Cupom aplicado",
+                          description: "Cupom aplicado ao produto com sucesso",
+                        })}
                       >
                         <BadgePercent className="h-4 w-4" />
                       </Button>
@@ -600,7 +607,10 @@ const Cupons = () => {
               <button 
                 className="px-4 py-2 bg-highlight hover:bg-highlight-hover text-white rounded-md"
                 onClick={() => {
-                  toast.success("Cupom criado com sucesso!");
+                  toast({
+                    title: "Cupom criado",
+                    description: "Cupom criado com sucesso!",
+                  });
                   setModalAberto(false);
                 }}
               >
