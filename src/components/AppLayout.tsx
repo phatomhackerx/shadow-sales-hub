@@ -76,8 +76,8 @@ const AppLayout = () => {
         )}
       >
         <div className="flex h-16 items-center px-6 border-b border-sidebar-border bg-sidebar">
-          <h1 className="text-xl font-bold text-white bg-gradient-to-r from-highlight to-blue-400 bg-clip-text text-transparent gradient-animation">
-            VENDAS HUB
+          <h1 className="text-2xl font-bold">
+            <span className="text-gradient-accent">VENDAS HUB</span>
           </h1>
         </div>
         <div className="flex flex-col h-[calc(100%-4rem)] p-4 overflow-y-auto scrollbar-hide">
@@ -107,32 +107,35 @@ const AppLayout = () => {
         )}>
           <div className="flex items-center">
             <button 
-              className="inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-sidebar-accent mr-2 transition-colors duration-200 icon-interactive"
+              className="inline-flex items-center justify-center rounded-xl p-2 text-foreground hover:bg-secondary/80 hover:text-primary mr-2 transition-all duration-300"
               onClick={toggleSidebar}
               aria-label="Toggle sidebar"
             >
               {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
             
-            <nav className="hidden md:flex items-center space-x-4">
-              <button 
-                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors duration-200 soft-hover px-3 py-2 rounded-md"
+            <nav className="hidden md:flex items-center space-x-2">
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={() => handleProfileAction("Home")}
               >
                 Home
-              </button>
-              <button 
-                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors duration-200 soft-hover px-3 py-2 rounded-md"
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={() => handleProfileAction("Suporte")}
               >
                 Suporte
-              </button>
-              <button 
-                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors duration-200 soft-hover px-3 py-2 rounded-md"
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={() => handleProfileAction("Documentação")}
               >
                 Documentação
-              </button>
+              </Button>
             </nav>
           </div>
           
@@ -142,37 +145,36 @@ const AppLayout = () => {
                 <Button 
                   variant="outline" 
                   size="icon" 
-                  className="relative hover:bg-secondary/50 transition-colors duration-200 icon-interactive"
+                  className="relative"
                   aria-label="Notificações"
                 >
                   <Bell className="h-[1.2rem] w-[1.2rem]" />
-                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-highlight text-[10px] text-white pulse-animation">3</span>
+                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">3</span>
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-md depth-card slide-up-animation">
+              <DialogContent className="sm:max-w-md grok-card">
                 <DialogHeader>
-                  <DialogTitle>Notificações</DialogTitle>
+                  <DialogTitle className="text-gradient">Notificações</DialogTitle>
                   <DialogDescription>
                     Acompanhe suas notificações mais recentes
                   </DialogDescription>
                 </DialogHeader>
-                <div className="py-4 space-y-4 max-h-[60vh] overflow-y-auto scrollbar-hide">
+                <div className="py-4 space-y-3 max-h-[60vh] overflow-y-auto scrollbar-hide">
                   {[...Array(5)].map((_, i) => (
                     <div 
                       key={i} 
-                      className="flex items-start gap-3 p-3 rounded-md hover:bg-secondary/30 transition-colors soft-hover"
-                      style={{ animationDelay: `${i * 0.1}s` }} 
+                      className="flex items-start gap-3 p-4 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/30 hover:bg-secondary/70 transition-all duration-300 cursor-pointer"
                     >
                       <div className={cn(
-                        "p-2 rounded-full", 
+                        "p-2 rounded-lg", 
                         i % 2 === 0 
-                          ? "bg-highlight/20 text-highlight" 
-                          : "bg-green-500/20 text-green-500"
+                          ? "bg-primary/20 text-primary" 
+                          : "bg-emerald-500/20 text-emerald-400"
                       )}>
                         {i % 2 === 0 ? <DollarSign className="h-4 w-4" /> : <User className="h-4 w-4" />}
                       </div>
-                      <div>
-                        <h4 className="text-sm font-medium">
+                      <div className="flex-1">
+                        <h4 className="text-sm font-semibold">
                           {i % 2 === 0 ? "Nova venda realizada" : "Novo afiliado cadastrado"}
                         </h4>
                         <p className="text-xs text-muted-foreground mt-1">
@@ -180,7 +182,7 @@ const AppLayout = () => {
                             ? `Curso de Marketing Digital - R$ ${(497 + i * 100).toFixed(2)}` 
                             : `${["Maria Silva", "Carlos Santos", "Ana Costa", "Pedro Souza", "Júlia Lima"][i]} ingressou no seu programa de afiliados`}
                         </p>
-                        <p className="text-xs text-muted-foreground mt-1">
+                        <p className="text-xs text-muted-foreground/70 mt-1">
                           Há {i + 1} {i === 0 ? "hora" : "horas"} atrás
                         </p>
                       </div>
@@ -192,26 +194,26 @@ const AppLayout = () => {
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className="flex items-center gap-2 rounded-full bg-secondary/30 p-1 pl-3 cursor-pointer hover:bg-secondary/50 transition-colors interactive-element">
-                  <span className="text-sm font-medium text-white hidden sm:inline-block">João Silva</span>
-                  <div className="h-8 w-8 rounded-full bg-gradient-to-br from-highlight to-blue-600 flex items-center justify-center gradient-animation">
-                    <span className="text-sm font-medium text-white">JS</span>
+                <div className="flex items-center gap-2 rounded-full bg-secondary/50 border border-border/50 p-1 pl-4 cursor-pointer hover:bg-secondary/70 hover:border-primary/30 transition-all duration-300">
+                  <span className="text-sm font-semibold hidden sm:inline-block">João Silva</span>
+                  <div className="h-9 w-9 rounded-full button-gradient flex items-center justify-center">
+                    <span className="text-sm font-bold text-primary-foreground">JS</span>
                   </div>
-                  <ChevronDown className="h-4 w-4 ml-1 text-muted-foreground sm:inline-block hidden" />
+                  <ChevronDown className="h-4 w-4 mr-1 text-muted-foreground sm:inline-block hidden" />
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 dropdown-content fade-in-scale-animation">
+              <DropdownMenuContent align="end" className="w-56 dropdown-content">
                 <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem 
-                  className="cursor-pointer flex items-center soft-hover" 
+                  className="cursor-pointer flex items-center" 
                   onClick={() => handleProfileAction("Perfil")}
                 >
                   <User className="mr-2 h-4 w-4" />
                   <span>Perfil</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem 
-                  className="cursor-pointer flex items-center soft-hover" 
+                  className="cursor-pointer flex items-center" 
                   onClick={() => handleProfileAction("Configurações")}
                 >
                   <Settings className="mr-2 h-4 w-4" />
@@ -219,7 +221,7 @@ const AppLayout = () => {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem 
-                  className="cursor-pointer flex items-center text-red-400 focus:text-red-400 soft-hover"
+                  className="cursor-pointer flex items-center text-red-400 focus:text-red-400"
                   onClick={() => handleProfileAction("Sair")}
                 >
                   <LogOut className="mr-2 h-4 w-4" />

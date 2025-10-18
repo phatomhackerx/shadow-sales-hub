@@ -91,11 +91,11 @@ const SidebarMenu = ({ onItemClick }: SidebarMenuProps) => {
             to={item.path}
             onClick={onItemClick}
             className={cn(
-              "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-all duration-300",
+              "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-all duration-300",
               isActive 
-                ? "bg-sidebar-accent text-highlight font-medium glow-effect" 
-                : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground",
-              item.highlight && !isActive && "text-highlight/90 font-medium"
+                ? "bg-primary text-primary-foreground font-medium shadow-[0_0_20px_hsl(217_91%_60%/0.3)]" 
+                : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground",
+              item.highlight && !isActive && "text-primary font-medium"
             )}
             style={{ 
               animationDelay: `${index * 0.05}s`,
@@ -104,12 +104,11 @@ const SidebarMenu = ({ onItemClick }: SidebarMenuProps) => {
           >
             <item.icon className={cn(
               "h-5 w-5 transition-transform",
-              isActive && "text-highlight subtle-bounce-animation",
-              item.highlight && !isActive && "text-highlight/90"
+              isActive && "subtle-bounce-animation"
             )} />
             <span>{item.title}</span>
             {item.highlight && !isActive && (
-              <span className="ml-auto bg-highlight/20 text-highlight text-xs px-1.5 py-0.5 rounded-full">
+              <span className="ml-auto bg-primary/20 text-primary text-xs px-2 py-0.5 rounded-full font-semibold">
                 Novo
               </span>
             )}

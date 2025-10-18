@@ -5,34 +5,51 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-    --radius: 0.5rem;
+    /* Grok-inspired Dark Theme - Deep blacks with vibrant accents */
+    --background: 222 47% 4%;
+    --foreground: 210 40% 98%;
+    
+    --card: 222 47% 6%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 222 47% 6%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 4%;
+    
+    --secondary: 222 47% 11%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 222 47% 11%;
+    --muted-foreground: 215 20% 65%;
+    
+    --accent: 217 91% 60%;
+    --accent-foreground: 222 47% 4%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 222 47% 11%;
+    --input: 222 47% 11%;
+    --ring: 217 91% 60%;
+    
+    --sidebar-background: 222 47% 5%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 222 47% 4%;
+    --sidebar-accent: 222 47% 11%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 47% 9%;
+    --sidebar-ring: 217 91% 60%;
+    
+    --radius: 0.75rem;
+    
+    /* Grok-inspired gradients and effects */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(230 80% 65%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(280 80% 60%) 0%, hsl(217 91% 60%) 100%);
+    --glow-primary: 0 0 20px hsl(217 91% 60% / 0.3);
+    --glow-accent: 0 0 30px hsl(217 91% 60% / 0.2);
   }
 }
 
@@ -74,49 +91,79 @@
     display: none;
   }
 
+  /* Grok-inspired modern utilities */
   .glass-card {
-    @apply backdrop-blur-sm bg-secondary/30 border border-white/10;
+    @apply backdrop-blur-xl bg-card/50 border border-border/50;
   }
   
-  .highlight-gradient {
-    @apply bg-gradient-to-r from-blue-500 to-blue-600;
+  .grok-card {
+    @apply bg-card border border-border rounded-xl p-6 transition-all duration-300;
+    box-shadow: 0 4px 6px -1px hsl(222 47% 4% / 0.3), 0 2px 4px -1px hsl(222 47% 4% / 0.2);
+  }
+  
+  .grok-card:hover {
+    @apply border-primary/30;
+    box-shadow: 0 10px 15px -3px hsl(217 91% 60% / 0.2), 0 4px 6px -2px hsl(217 91% 60% / 0.1);
   }
   
   .card-hover {
-    @apply transition-all duration-200 hover:shadow-lg hover:border-highlight/20;
+    @apply transition-all duration-300 hover:shadow-[0_0_30px_hsl(217_91%_60%/0.15)] hover:border-primary/30;
   }
   
   .glow-effect {
-    @apply relative;
+    @apply relative transition-all duration-300;
   }
   
-  .glow-effect::after {
-    @apply content-[''] absolute -inset-0.5 bg-gradient-to-r from-highlight to-blue-600 opacity-0 rounded-lg blur transition duration-200;
+  .glow-effect::before {
+    content: '';
+    @apply absolute -inset-1 bg-gradient-to-r from-primary to-accent opacity-0 rounded-xl blur-lg transition-opacity duration-300;
     z-index: -1;
   }
   
-  .glow-effect:hover::after {
-    @apply opacity-20;
+  .glow-effect:hover::before {
+    @apply opacity-30;
   }
   
   .text-gradient {
-    @apply bg-gradient-to-br from-white to-white/70 bg-clip-text text-transparent;
+    background: var(--gradient-primary);
+    @apply bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-accent {
+    background: var(--gradient-accent);
+    @apply bg-clip-text text-transparent;
   }
   
   .button-gradient {
-    @apply bg-gradient-to-r from-highlight to-blue-600 hover:from-highlight/90 hover:to-blue-700 transition-colors;
+    background: var(--gradient-primary);
+    @apply hover:opacity-90 transition-all duration-300;
+    box-shadow: var(--glow-primary);
   }
   
-  .card-gradient {
-    @apply bg-gradient-to-br from-secondary/40 to-secondary/20 hover:from-secondary/50 hover:to-secondary/30 transition-all duration-300;
+  .button-gradient:hover {
+    box-shadow: var(--glow-accent);
   }
   
   .dropdown-content {
-    @apply bg-secondary/90 backdrop-blur-sm border border-border/40 shadow-xl;
+    @apply bg-popover/95 backdrop-blur-xl border border-border shadow-2xl;
   }
   
   .subtle-highlight {
-    @apply border-highlight/20 bg-highlight/5 hover:bg-highlight/10 transition-colors;
+    @apply border-primary/20 bg-primary/5 hover:bg-primary/10 transition-all duration-300;
+  }
+  
+  .grok-input {
+    @apply bg-secondary/50 border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300;
+  }
+  
+  .grok-button {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl font-medium transition-all duration-300;
+    box-shadow: 0 4px 12px hsl(217 91% 60% / 0.3);
+  }
+  
+  .grok-button:hover {
+    box-shadow: 0 6px 20px hsl(217 91% 60% / 0.4);
+    transform: translateY(-1px);
   }
   
   /* Nova classe para interatividade de elementos */

@@ -37,21 +37,27 @@ export function StatsCard({
   className 
 }: StatsCardProps) {
   return (
-    <div className={cn(cardVariants({ variant }), className)}>
+    <div className={cn("grok-card", cardVariants({ variant }), className)}>
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
-        {icon && <div className="text-muted-foreground">{icon}</div>}
+        {icon && (
+          <div className="text-primary bg-primary/10 p-2 rounded-lg">
+            {icon}
+          </div>
+        )}
       </div>
-      <div className="mt-2 flex items-baseline">
-        <p className="text-2xl font-semibold">{value}</p>
+      <div className="mt-3 flex items-baseline gap-2">
+        <p className="text-3xl font-bold text-gradient">{value}</p>
         {trend && (
           <span 
             className={cn(
-              "ml-2 text-xs font-medium",
-              trend.positive ? "text-green-500" : "text-red-500"
+              "text-sm font-semibold flex items-center gap-1 px-2 py-1 rounded-lg",
+              trend.positive 
+                ? "text-emerald-400 bg-emerald-400/10" 
+                : "text-red-400 bg-red-400/10"
             )}
           >
-            {trend.positive ? '+' : ''}{trend.value}%
+            {trend.positive ? '↑' : '↓'} {Math.abs(trend.value)}%
           </span>
         )}
       </div>

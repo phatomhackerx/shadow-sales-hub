@@ -64,8 +64,8 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				highlight: {
-					DEFAULT: '#3B82F6',
-					hover: '#2563EB'
+					DEFAULT: 'hsl(var(--primary))',
+					hover: 'hsl(var(--primary) / 0.9)'
 				}
 			},
 			borderRadius: {

@@ -89,12 +89,14 @@ const Produtos = () => {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Produtos</h1>
-          <p className="text-muted-foreground">Gerencie seus produtos e serviços digitais</p>
+          <h1 className="text-3xl font-bold tracking-tight">
+            <span className="text-gradient">Produtos</span>
+          </h1>
+          <p className="text-muted-foreground mt-2">Gerencie seus produtos e serviços digitais</p>
         </div>
         <Link to="/produtos/novo">
-          <Button className="bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 flex items-center gap-2 interactive-element">
-            <Plus className="h-4 w-4" />
+          <Button variant="grok" size="lg" className="gap-2">
+            <Plus className="h-5 w-5" />
             <span>Novo Produto</span>
           </Button>
         </Link>
@@ -106,18 +108,18 @@ const Produtos = () => {
           <input 
             type="text" 
             placeholder="Buscar produtos..." 
-            className="pl-10 pr-4 py-2 w-full sm:w-80 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight"
+            className="grok-input pl-10 pr-4 py-3 w-full sm:w-96 rounded-xl"
             value={pesquisa}
             onChange={(e) => setPesquisa(e.target.value)}
           />
         </div>
         <div className="flex flex-wrap gap-2">
-          <div className="flex items-center gap-2 px-3 py-2 bg-secondary rounded-md border border-border hover:bg-secondary/80">
+          <Button variant="outline" size="sm" className="gap-2">
             <Filter className="h-4 w-4" />
             <span>Filtros</span>
-          </div>
+          </Button>
           <select 
-            className="px-3 py-2 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight"
+            className="grok-input px-4 py-2 rounded-xl"
             value={filtroStatus}
             onChange={(e) => setFiltroStatus(e.target.value)}
           >
@@ -126,7 +128,7 @@ const Produtos = () => {
             <option value="inativo">Inativo</option>
             <option value="em revisão">Em Revisão</option>
           </select>
-          <select className="px-3 py-2 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight">
+          <select className="grok-input px-4 py-2 rounded-xl">
             <option value="recentes">Mais recentes</option>
             <option value="vendas">Mais vendidos</option>
             <option value="receita">Maior receita</option>
@@ -134,53 +136,53 @@ const Produtos = () => {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {produtosFiltrados.map((produto) => (
-          <Card key={produto.id} className="border border-border hover:border-highlight/30 transition-all duration-300 depth-card">
+          <Card key={produto.id} className="grok-card group">
             <CardContent className="p-0">
-              <div className="p-4 flex justify-between items-start border-b border-border">
+              <div className="p-5 flex justify-between items-start border-b border-border/50">
                 <div>
-                  <h3 className="font-medium text-lg">{produto.nome}</h3>
-                  <p className="text-highlight text-sm font-medium mt-1">{produto.preco}</p>
+                  <h3 className="font-bold text-lg group-hover:text-primary transition-colors">{produto.nome}</h3>
+                  <p className="text-primary text-base font-bold mt-2">{produto.preco}</p>
                 </div>
                 <Badge className={
                   produto.status === "Ativo" 
-                    ? "bg-green-500/20 text-green-500 hover:bg-green-500/30" 
+                    ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" 
                     : produto.status === "Inativo"
-                    ? "bg-red-500/20 text-red-500 hover:bg-red-500/30"
-                    : "bg-yellow-500/20 text-yellow-500 hover:bg-yellow-500/30"
+                    ? "bg-red-500/20 text-red-400 border-red-500/30"
+                    : "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
                 }>
                   {produto.status}
                 </Badge>
               </div>
-              <div className="p-4 grid grid-cols-2 gap-2 text-sm">
-                <div>
-                  <p className="text-muted-foreground">Vendas</p>
-                  <p className="font-medium">{produto.vendas}</p>
+              <div className="p-5 grid grid-cols-2 gap-4">
+                <div className="bg-secondary/50 p-3 rounded-lg border border-border/50">
+                  <p className="text-muted-foreground text-xs">Vendas</p>
+                  <p className="font-bold text-xl mt-1">{produto.vendas}</p>
                 </div>
-                <div>
-                  <p className="text-muted-foreground">Receita</p>
-                  <p className="font-medium">{produto.revenue}</p>
+                <div className="bg-secondary/50 p-3 rounded-lg border border-border/50">
+                  <p className="text-muted-foreground text-xs">Receita</p>
+                  <p className="font-bold text-xl mt-1">{produto.revenue}</p>
                 </div>
               </div>
-              <div className="p-4 border-t border-border flex flex-col space-y-2">
+              <div className="p-5 border-t border-border/50 flex flex-col space-y-3">
                 <div className="flex justify-between items-center">
                   <Link to={`/produtos/${produto.id}`}>
-                    <Button variant="outline" size="sm" className="h-9 px-3 icon-interactive">
+                    <Button variant="outline" size="sm" className="gap-2">
                       <FileText className="h-4 w-4" />
-                      <span className="ml-2">Detalhes</span>
+                      <span>Detalhes</span>
                     </Button>
                   </Link>
                   <div className="flex space-x-2">
                     <Link to={`/produtos/editar/${produto.id}`}>
-                      <Button variant="ghost" size="icon" className="h-8 w-8 text-highlight icon-interactive">
+                      <Button variant="ghost" size="icon" className="hover:text-primary hover:bg-primary/10">
                         <Edit className="h-4 w-4" />
                       </Button>
                     </Link>
                     <Button 
                       variant="ghost" 
                       size="icon" 
-                      className="h-8 w-8 text-red-500 hover:text-red-600 icon-interactive"
+                      className="hover:text-red-400 hover:bg-red-400/10"
                       onClick={() => handleDeleteProduct(produto.id)}
                     >
                       <Trash2 className="h-4 w-4" />
@@ -188,8 +190,8 @@ const Produtos = () => {
                   </div>
                 </div>
                 <Link to={`/produtos/${produto.id}/checkout-builder`}>
-                  <Button variant="outline" size="sm" className="w-full h-9 border-highlight/50 text-highlight hover:bg-highlight/10 icon-interactive">
-                    <Layout className="h-4 w-4 mr-2" />
+                  <Button variant="outline" size="sm" className="w-full gap-2 border-primary/30 hover:bg-primary/10 hover:text-primary">
+                    <Layout className="h-4 w-4" />
                     Checkout Builder
                   </Button>
                 </Link>
@@ -200,11 +202,11 @@ const Produtos = () => {
       </div>
       
       {produtosFiltrados.length === 0 && (
-        <div className="text-center p-8 border border-dashed border-border rounded-lg">
-          <p className="text-muted-foreground">Nenhum produto encontrado.</p>
+        <div className="grok-card text-center p-12">
+          <p className="text-muted-foreground text-lg">Nenhum produto encontrado.</p>
           <Link to="/produtos/novo">
-            <Button className="mt-4 bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 flex items-center gap-2 mx-auto interactive-element">
-              <Plus className="h-4 w-4" />
+            <Button variant="grok" size="lg" className="mt-6 gap-2">
+              <Plus className="h-5 w-5" />
               <span>Criar Novo Produto</span>
             </Button>
           </Link>
@@ -216,7 +218,7 @@ const Produtos = () => {
           <p className="text-sm text-muted-foreground">Mostrando {produtosFiltrados.length} de {produtos.length} produtos</p>
           <div className="flex space-x-2">
             <Button variant="outline" size="sm" disabled>Anterior</Button>
-            <Button variant="default" size="sm" className="bg-highlight hover:bg-highlight-hover">1</Button>
+            <Button variant="default" size="sm">1</Button>
             <Button variant="outline" size="sm" disabled>Próximo</Button>
           </div>
         </div>
