@@ -82,7 +82,7 @@ const SidebarMenu = ({ onItemClick }: SidebarMenuProps) => {
   const location = useLocation();
   
   return (
-    <div className="flex flex-col space-y-1">
+    <div className="flex flex-col space-y-1 py-2">
       {menuItems.map((item, index) => {
         const isActive = location.pathname === item.path;
         return (
@@ -91,26 +91,24 @@ const SidebarMenu = ({ onItemClick }: SidebarMenuProps) => {
             to={item.path}
             onClick={onItemClick}
             className={cn(
-              "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-all duration-300",
+              "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 relative overflow-hidden group",
               isActive 
-                ? "bg-primary text-primary-foreground font-medium shadow-[0_0_20px_hsl(217_91%_60%/0.3)]" 
-                : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground",
-              item.highlight && !isActive && "text-primary font-medium"
+                ? "bg-foreground text-background" 
+                : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground"
             )}
-            style={{ 
-              animationDelay: `${index * 0.05}s`,
-              transform: isActive ? 'translateX(4px)' : 'translateX(0)',
-            }}
           >
             <item.icon className={cn(
-              "h-5 w-5 transition-transform",
-              isActive && "subtle-bounce-animation"
+              "h-4 w-4 transition-transform flex-shrink-0",
+              isActive && "scale-110"
             )} />
-            <span>{item.title}</span>
+            <span className="truncate">{item.title}</span>
             {item.highlight && !isActive && (
-              <span className="ml-auto bg-primary/20 text-primary text-xs px-2 py-0.5 rounded-full font-semibold">
-                Novo
+              <span className="ml-auto bg-foreground/10 text-foreground text-xs px-1.5 py-0.5 rounded-md font-medium flex-shrink-0">
+                New
               </span>
+            )}
+            {isActive && (
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-4 bg-background rounded-r-full" />
             )}
           </Link>
         );

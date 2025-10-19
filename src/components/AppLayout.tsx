@@ -71,18 +71,18 @@ const AppLayout = () => {
     <div className="flex h-screen overflow-hidden bg-background relative">
       <StarryBackground />
       {/* Sidebar */}
-      <aside
+      <aside 
         className={cn(
-          "fixed inset-y-0 left-0 z-50 w-64 transform border-r border-sidebar-border bg-sidebar transition-transform duration-300 ease-in-out",
+          "fixed inset-y-0 left-0 z-50 w-64 transform border-r border-sidebar-border bg-sidebar transition-transform duration-200 ease-out",
           isMobile && !sidebarOpen && "-translate-x-full"
         )}
       >
-        <div className="flex h-16 items-center px-6 border-b border-sidebar-border bg-sidebar">
-          <h1 className="text-xl font-semibold tracking-tight">
+        <div className="flex h-16 items-center justify-center px-6 border-b border-sidebar-border/50">
+          <h1 className="text-lg font-semibold tracking-wide">
             VENDAS HUB
           </h1>
         </div>
-        <div className="flex flex-col h-[calc(100%-4rem)] p-4 overflow-y-auto scrollbar-hide">
+        <div className="flex flex-col h-[calc(100%-4rem)] px-3 py-2 overflow-y-auto scrollbar-hide">
           <SidebarMenu onItemClick={handleMenuItemClick} />
         </div>
       </aside>
@@ -104,22 +104,23 @@ const AppLayout = () => {
       >
         {/* Top header */}
         <header className={cn(
-          "sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/40 px-4 sm:px-6 transition-all duration-200",
-          scrolled ? "bg-background/80 backdrop-blur-xl" : "bg-background/60 backdrop-blur-lg"
+          "sticky top-0 z-30 flex h-14 items-center justify-between border-b border-border/40 px-3 sm:px-4 lg:px-6 transition-all duration-200",
+          scrolled ? "bg-background/90 backdrop-blur-xl shadow-sm" : "bg-background/80 backdrop-blur-lg"
         )}>
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <button 
-              className="inline-flex items-center justify-center rounded-lg p-2 text-foreground hover:bg-secondary/60 mr-2 transition-all duration-200"
+              className="inline-flex items-center justify-center rounded-lg p-2 text-foreground hover:bg-secondary/60 transition-all duration-200"
               onClick={toggleSidebar}
               aria-label="Toggle sidebar"
             >
               {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
             
-            <nav className="hidden md:flex items-center space-x-2">
+            <nav className="hidden lg:flex items-center space-x-1">
               <Button
                 variant="ghost"
                 size="sm"
+                className="text-xs"
                 onClick={() => handleProfileAction("Home")}
               >
                 Home
@@ -127,31 +128,25 @@ const AppLayout = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                className="text-xs"
                 onClick={() => handleProfileAction("Suporte")}
               >
                 Suporte
               </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => handleProfileAction("Documentação")}
-              >
-                Documentação
-              </Button>
             </nav>
           </div>
           
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-2">
             <Dialog>
               <DialogTrigger asChild>
                 <Button 
-                  variant="outline" 
+                  variant="ghost" 
                   size="icon" 
-                  className="relative"
+                  className="relative h-9 w-9"
                   aria-label="Notificações"
                 >
-                  <Bell className="h-[1.2rem] w-[1.2rem]" />
-                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">3</span>
+                  <Bell className="h-4 w-4" />
+                  <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-foreground text-[9px] font-bold text-background">3</span>
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md grok-card">
@@ -196,15 +191,14 @@ const AppLayout = () => {
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className="flex items-center gap-2 rounded-full bg-secondary/40 border border-border/40 p-1 pl-4 cursor-pointer hover:bg-secondary/60 transition-all duration-200">
-                  <span className="text-sm font-medium hidden sm:inline-block">João Silva</span>
-                  <div className="h-9 w-9 rounded-full bg-foreground text-background flex items-center justify-center">
-                    <span className="text-sm font-semibold">JS</span>
+                <button className="flex items-center gap-2 rounded-full bg-secondary/30 border border-border/40 p-0.5 pl-3 hover:bg-secondary/50 transition-all duration-200 outline-none focus:ring-2 focus:ring-foreground/20">
+                  <span className="text-xs font-medium hidden md:inline-block truncate max-w-[100px]">João Silva</span>
+                  <div className="h-8 w-8 rounded-full bg-foreground text-background flex items-center justify-center flex-shrink-0">
+                    <span className="text-xs font-semibold">JS</span>
                   </div>
-                  <ChevronDown className="h-4 w-4 mr-1 text-muted-foreground sm:inline-block hidden" />
-                </div>
+                </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 glass-card">
+              <DropdownMenuContent align="end" className="w-48 glass-card">
                 <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem 
@@ -235,8 +229,8 @@ const AppLayout = () => {
         </header>
         
         {/* Page content */}
-        <div className="flex-1 p-4 sm:p-6 overflow-x-hidden">
-          <div className="slide-up-animation">
+        <div className="flex-1 p-3 sm:p-4 md:p-6 lg:p-8 overflow-x-hidden">
+          <div className="max-w-7xl mx-auto">
             <Outlet />
           </div>
         </div>

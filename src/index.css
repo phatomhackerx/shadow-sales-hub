@@ -92,19 +92,26 @@
   /* Minimalist Grok-inspired utilities */
   .glass-card {
     @apply backdrop-blur-xl bg-card/50 border border-border/40;
-    box-shadow: var(--soft-shadow);
+    box-shadow: 0 4px 16px hsl(0 0% 0% / 0.3);
   }
   
   .grok-card {
-    @apply rounded-xl p-6 transition-all duration-300 border border-border/60 bg-card;
-    box-shadow: var(--soft-shadow);
+    @apply rounded-xl p-6 transition-all duration-200 border border-border/50 bg-card;
+    box-shadow: 0 2px 8px hsl(0 0% 0% / 0.25);
     position: relative;
   }
   
   .grok-card:hover {
-    @apply border-border;
-    box-shadow: 0 8px 24px hsl(0 0% 0% / 0.5);
-    transform: translateY(-2px);
+    @apply border-border/70;
+    box-shadow: 0 8px 24px hsl(0 0% 0% / 0.4);
+    transform: translateY(-1px);
+  }
+  
+  /* Responsive utilities */
+  @media (max-width: 768px) {
+    .grok-card {
+      @apply p-4;
+    }
   }
   
   .card-hover {
@@ -131,14 +138,21 @@
   }
   
   .grok-input {
-    @apply bg-input border-border rounded-lg transition-all duration-200;
-    @apply focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10;
-    @apply hover:border-foreground/30;
+    @apply bg-input border border-border/60 rounded-lg transition-all duration-200;
+    @apply focus:border-foreground/60 focus:ring-2 focus:ring-foreground/10 focus:bg-input;
+    @apply hover:border-border placeholder:text-muted-foreground/60;
+    @apply text-sm;
   }
   
   .grok-button {
     @apply bg-foreground text-background rounded-lg font-medium transition-all duration-200;
     @apply hover:bg-foreground/90 active:scale-[0.98];
+    @apply shadow-sm hover:shadow-md;
+  }
+  
+  /* Smooth focus effects */
+  .smooth-focus {
+    @apply transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20;
   }
   
   /* Nova classe para interatividade de elementos */

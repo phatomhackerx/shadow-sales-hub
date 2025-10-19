@@ -58,46 +58,47 @@ export function WelcomeHeader() {
   };
 
   return (
-    <div className="mb-8 animate-fade-in">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+    <div className="mb-4 md:mb-6 animate-fade-in">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight mb-2">
-            {greeting}, João Silva
+          <h1 className="text-2xl md:text-3xl font-semibold tracking-tight mb-1.5">
+            {greeting}, João
           </h1>
-          <div className="flex items-center text-muted-foreground">
-            <Calendar className="mr-2 h-4 w-4" />
-            <p>{currentDate}</p>
+          <div className="flex items-center text-muted-foreground text-sm">
+            <Calendar className="mr-1.5 h-3.5 w-3.5" />
+            <p className="truncate">{currentDate}</p>
           </div>
         </div>
-        <div className="mt-4 md:mt-0 flex items-center space-x-2">
+        <div className="mt-3 md:mt-0 flex items-center">
           <Button 
             onClick={handleTodoClick}
             variant="outline"
-            className="gap-2"
+            size="sm"
+            className="gap-2 text-xs"
           >
-            <span>Ver tarefas pendentes</span>
-            <ChevronRight className="h-4 w-4" />
+            <span className="hidden sm:inline">Ver tarefas</span>
+            <span className="sm:hidden">Tarefas</span>
+            <ChevronRight className="h-3.5 w-3.5" />
           </Button>
         </div>
       </div>
       
-      <Card className="grok-card border-border/60 bg-card/80">
-        <div className="flex items-start space-x-4">
-          <div className="p-3 rounded-lg bg-foreground/10">
-            <Bell className="h-5 w-5" />
+      <Card className="grok-card border-border/50 bg-card/80">
+        <div className="flex items-start space-x-3">
+          <div className="p-2 md:p-2.5 rounded-lg bg-foreground/10 flex-shrink-0">
+            <Bell className="h-4 w-4 md:h-5 md:w-5" />
           </div>
-          <div className="flex-1">
-            <h3 className="font-semibold text-base mb-1">Dica do dia</h3>
-            <p className="text-sm text-muted-foreground">
-              Configure integrações com meios de pagamento para expandir seu alcance. Acesse a página de 
+          <div className="flex-1 min-w-0">
+            <h3 className="font-semibold text-sm md:text-base mb-1">Dica do dia</h3>
+            <p className="text-xs md:text-sm text-muted-foreground">
+              Configure integrações com meios de pagamento. Acesse{" "}
               <button 
-                className="inline-flex items-center text-foreground hover:underline cursor-pointer mx-1 group font-medium" 
+                className="inline-flex items-center text-foreground hover:underline cursor-pointer group font-medium" 
                 onClick={() => window.location.href = '/integracoes'}
               >
                 Integrações
-                <ArrowRight className="ml-1 h-3 w-3 transform transition-transform group-hover:translate-x-1" />
-              </button> 
-              para conhecer as opções disponíveis.
+                <ArrowRight className="ml-0.5 h-3 w-3 transform transition-transform group-hover:translate-x-0.5" />
+              </button>.
             </p>
           </div>
         </div>

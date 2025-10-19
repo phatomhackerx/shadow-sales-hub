@@ -58,64 +58,64 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       <WelcomeHeader />
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         {statCards.map((stat, index) => (
-          <div key={index} className="slide-up-animation" style={{ animationDelay: `${index * 0.05}s` }}>
+          <div key={index} className="animate-fade-in" style={{ animationDelay: `${index * 0.05}s` }}>
             <StatsCard
               title={stat.title}
               value={stat.value}
               trend={stat.trend}
               icon={stat.icon}
-              className={cn("interactive-element depth-card", stat.className)}
+              className={stat.className}
             />
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
         <Card className="lg:col-span-2 grok-card">
-          <CardHeader className="pb-4">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-y-3">
+          <CardHeader className="pb-3 md:pb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
-                <CardTitle className="text-xl font-semibold flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5" />
+                <CardTitle className="text-lg md:text-xl font-semibold flex items-center gap-2">
+                  <TrendingUp className="h-4 w-4 md:h-5 md:w-5" />
                   Desempenho de Vendas
                 </CardTitle>
-                <CardDescription className="mt-2">
-                  Análise do desempenho de vendas dos últimos {
+                <CardDescription className="mt-1 text-xs md:text-sm">
+                  Últimos {
                     chartPeriod === "7dias" ? "7 dias" : 
                     chartPeriod === "30dias" ? "30 dias" : 
                     chartPeriod === "90dias" ? "90 dias" : "30 dias"
                   }
                 </CardDescription>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 <Button 
                   variant={chartPeriod === "7dias" ? "default" : "outline"}
                   size="sm" 
-                  className="h-9"
+                  className="h-8 text-xs px-3"
                   onClick={() => handlePeriodChange("7dias")}
                 >
-                  7 dias
+                  7d
                 </Button>
                 <Button 
                   variant={chartPeriod === "30dias" ? "default" : "outline"}
                   size="sm" 
-                  className="h-9"
+                  className="h-8 text-xs px-3"
                   onClick={() => handlePeriodChange("30dias")}
                 >
-                  30 dias
+                  30d
                 </Button>
                 <Button 
                   variant={chartPeriod === "90dias" ? "default" : "outline"}
                   size="sm" 
-                  className="h-9"
+                  className="h-8 text-xs px-3"
                   onClick={() => handlePeriodChange("90dias")}
                 >
-                  90 dias
+                  90d
                 </Button>
               </div>
             </div>
