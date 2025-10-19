@@ -5,53 +5,49 @@
 
 @layer base {
   :root {
-    /* Grok-inspired Dark Theme - Ultra modern with vibrant gradients */
-    --background: 220 40% 2%;
-    --foreground: 210 40% 98%;
+    /* Minimalist Black & White Theme - Grok-inspired */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
     
-    --card: 220 40% 4%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 98%;
     
-    --popover: 220 40% 4%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 98%;
     
-    --primary: 210 100% 60%;
-    --primary-foreground: 220 40% 2%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 4%;
     
-    --secondary: 220 40% 8%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 98%;
     
-    --muted: 220 40% 10%;
-    --muted-foreground: 215 20% 60%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 65%;
     
-    --accent: 280 80% 60%;
-    --accent-foreground: 220 40% 2%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 98%;
     
-    --destructive: 0 90% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
     
-    --border: 220 40% 12%;
-    --input: 220 40% 10%;
-    --ring: 210 100% 60%;
+    --border: 0 0% 18%;
+    --input: 0 0% 12%;
+    --ring: 0 0% 80%;
     
-    --sidebar-background: 220 40% 3%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 210 100% 60%;
-    --sidebar-primary-foreground: 220 40% 2%;
-    --sidebar-accent: 220 40% 8%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 220 40% 10%;
-    --sidebar-ring: 210 100% 60%;
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 0 0% 80%;
     
-    --radius: 1rem;
+    --radius: 0.75rem;
     
-    /* Advanced Grok gradients and effects */
-    --gradient-primary: linear-gradient(135deg, hsl(210 100% 60%) 0%, hsl(230 95% 65%) 50%, hsl(250 90% 65%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(280 90% 65%) 0%, hsl(260 85% 60%) 50%, hsl(210 100% 60%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(220 40% 6%) 0%, hsl(220 40% 4%) 100%);
-    --glow-primary: 0 0 40px hsl(210 100% 60% / 0.4), 0 0 80px hsl(210 100% 60% / 0.2);
-    --glow-accent: 0 0 60px hsl(280 90% 65% / 0.3), 0 0 100px hsl(280 90% 65% / 0.15);
-    --shimmer: linear-gradient(90deg, transparent, hsl(210 100% 60% / 0.1), transparent);
+    /* Minimalist effects */
+    --subtle-glow: 0 0 20px hsl(0 0% 100% / 0.1);
+    --soft-shadow: 0 4px 12px hsl(0 0% 0% / 0.4);
   }
 }
 
@@ -93,98 +89,35 @@
     display: none;
   }
 
-  /* Ultra-modern Grok-inspired utilities */
+  /* Minimalist Grok-inspired utilities */
   .glass-card {
-    @apply backdrop-blur-2xl bg-card/40 border border-border/60;
-    background: linear-gradient(145deg, hsl(220 40% 6% / 0.6), hsl(220 40% 4% / 0.4));
+    @apply backdrop-blur-xl bg-card/50 border border-border/40;
+    box-shadow: var(--soft-shadow);
   }
   
   .grok-card {
-    @apply rounded-2xl p-6 transition-all duration-500 border border-border/50;
-    background: var(--gradient-card);
-    box-shadow: 0 8px 32px hsl(220 40% 2% / 0.6), 0 0 0 1px hsl(220 40% 12% / 0.3);
+    @apply rounded-xl p-6 transition-all duration-300 border border-border/60 bg-card;
+    box-shadow: var(--soft-shadow);
     position: relative;
-    overflow: hidden;
-  }
-  
-  .grok-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: var(--shimmer);
-    transition: left 0.7s;
   }
   
   .grok-card:hover {
-    @apply border-primary/40;
-    box-shadow: 0 20px 60px hsl(210 100% 60% / 0.15), 0 0 0 1px hsl(210 100% 60% / 0.2);
+    @apply border-border;
+    box-shadow: 0 8px 24px hsl(0 0% 0% / 0.5);
     transform: translateY(-2px);
   }
   
-  .grok-card:hover::before {
-    left: 100%;
-  }
-  
   .card-hover {
-    @apply transition-all duration-500;
+    @apply transition-all duration-300;
   }
   
   .card-hover:hover {
-    box-shadow: var(--glow-primary);
-    @apply border-primary/50 -translate-y-1;
-  }
-  
-  .glow-effect {
-    @apply relative transition-all duration-500;
-  }
-  
-  .glow-effect::before {
-    content: '';
-    @apply absolute -inset-2 opacity-0 rounded-2xl blur-xl transition-all duration-500;
-    background: var(--gradient-primary);
-    z-index: -1;
-  }
-  
-  .glow-effect:hover::before {
-    @apply opacity-40;
+    box-shadow: var(--subtle-glow);
+    @apply border-border -translate-y-1;
   }
   
   .text-gradient {
-    background: var(--gradient-primary);
-    @apply bg-clip-text text-transparent;
-    animation: gradient-shift 3s ease infinite;
-    background-size: 200% 200%;
-  }
-  
-  .text-gradient-accent {
-    background: var(--gradient-accent);
-    @apply bg-clip-text text-transparent;
-    animation: gradient-shift 3s ease infinite;
-    background-size: 200% 200%;
-  }
-  
-  .button-gradient {
-    background: var(--gradient-primary);
-    @apply relative overflow-hidden transition-all duration-500;
-    box-shadow: var(--glow-primary);
-  }
-  
-  .button-gradient::after {
-    content: '';
-    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
-    background: linear-gradient(135deg, transparent 0%, hsl(210 100% 70% / 0.2) 50%, transparent 100%);
-  }
-  
-  .button-gradient:hover {
-    box-shadow: var(--glow-accent);
-    transform: translateY(-2px) scale(1.02);
-  }
-  
-  .button-gradient:hover::after {
-    @apply opacity-100;
+    @apply bg-gradient-to-r from-white to-muted-foreground bg-clip-text text-transparent;
   }
   
   .dropdown-content {
@@ -198,20 +131,14 @@
   }
   
   .grok-input {
-    @apply bg-secondary/80 border-border/60 rounded-xl transition-all duration-300;
-    @apply focus:border-primary/60 focus:ring-4 focus:ring-primary/10;
-    @apply hover:border-primary/40;
+    @apply bg-input border-border rounded-lg transition-all duration-200;
+    @apply focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10;
+    @apply hover:border-foreground/30;
   }
   
   .grok-button {
-    @apply bg-primary text-primary-foreground rounded-xl font-semibold transition-all duration-300;
-    @apply hover:bg-primary/90 active:scale-95;
-    box-shadow: 0 4px 20px hsl(210 100% 60% / 0.4);
-  }
-  
-  .grok-button:hover {
-    box-shadow: var(--glow-primary);
-    transform: translateY(-2px);
+    @apply bg-foreground text-background rounded-lg font-medium transition-all duration-200;
+    @apply hover:bg-foreground/90 active:scale-[0.98];
   }
   
   /* Nova classe para interatividade de elementos */

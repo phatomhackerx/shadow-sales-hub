@@ -58,11 +58,11 @@ export function WelcomeHeader() {
   };
 
   return (
-    <div className="mb-8 animate-fade-in slide-up-animation">
+    <div className="mb-8 animate-fade-in">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
         <div>
-          <h1 className="text-4xl font-bold tracking-tight mb-2">
-            <span className="text-gradient">{greeting}, João Silva</span>
+          <h1 className="text-3xl font-semibold tracking-tight mb-2">
+            {greeting}, João Silva
           </h1>
           <div className="flex items-center text-muted-foreground">
             <Calendar className="mr-2 h-4 w-4" />
@@ -81,17 +81,17 @@ export function WelcomeHeader() {
         </div>
       </div>
       
-      <Card className="grok-card border-primary/30 bg-gradient-to-r from-primary/5 to-primary/10">
+      <Card className="grok-card border-border/60 bg-card/80">
         <div className="flex items-start space-x-4">
-          <div className="p-3 rounded-xl bg-primary/20">
-            <Bell className="h-6 w-6 text-primary" />
+          <div className="p-3 rounded-lg bg-foreground/10">
+            <Bell className="h-5 w-5" />
           </div>
           <div className="flex-1">
-            <h3 className="font-bold text-lg mb-2">Dica do dia</h3>
+            <h3 className="font-semibold text-base mb-1">Dica do dia</h3>
             <p className="text-sm text-muted-foreground">
               Configure integrações com meios de pagamento para expandir seu alcance. Acesse a página de 
               <button 
-                className="inline-flex items-center text-primary hover:underline cursor-pointer mx-1 group font-semibold" 
+                className="inline-flex items-center text-foreground hover:underline cursor-pointer mx-1 group font-medium" 
                 onClick={() => window.location.href = '/integracoes'}
               >
                 Integrações

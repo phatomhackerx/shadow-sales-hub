@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import SidebarMenu from "./SidebarMenu";
+import { StarryBackground } from "@/components/StarryBackground";
 import { X, Menu, Bell, ChevronDown, User, DollarSign, Settings, LogOut } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
@@ -67,17 +68,18 @@ const AppLayout = () => {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="flex h-screen overflow-hidden bg-background relative">
+      <StarryBackground />
       {/* Sidebar */}
-      <aside 
+      <aside
         className={cn(
           "fixed inset-y-0 left-0 z-50 w-64 transform border-r border-sidebar-border bg-sidebar transition-transform duration-300 ease-in-out",
           isMobile && !sidebarOpen && "-translate-x-full"
         )}
       >
         <div className="flex h-16 items-center px-6 border-b border-sidebar-border bg-sidebar">
-          <h1 className="text-2xl font-bold">
-            <span className="text-gradient-accent">VENDAS HUB</span>
+          <h1 className="text-xl font-semibold tracking-tight">
+            VENDAS HUB
           </h1>
         </div>
         <div className="flex flex-col h-[calc(100%-4rem)] p-4 overflow-y-auto scrollbar-hide">
@@ -96,18 +98,18 @@ const AppLayout = () => {
       {/* Main Content */}
       <main 
         className={cn(
-          "flex flex-col flex-1 overflow-y-auto transition-all duration-300 ease-in-out",
+          "flex flex-col flex-1 overflow-y-auto transition-all duration-300 ease-in-out relative z-10",
           isMobile ? "w-full" : "ml-64"
         )}
       >
         {/* Top header */}
         <header className={cn(
-          "sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/40 px-4 sm:px-6 transition-all duration-300 ease-in-out",
-          scrolled ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-background"
+          "sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/40 px-4 sm:px-6 transition-all duration-200",
+          scrolled ? "bg-background/80 backdrop-blur-xl" : "bg-background/60 backdrop-blur-lg"
         )}>
           <div className="flex items-center">
             <button 
-              className="inline-flex items-center justify-center rounded-xl p-2 text-foreground hover:bg-secondary/80 hover:text-primary mr-2 transition-all duration-300"
+              className="inline-flex items-center justify-center rounded-lg p-2 text-foreground hover:bg-secondary/60 mr-2 transition-all duration-200"
               onClick={toggleSidebar}
               aria-label="Toggle sidebar"
             >
@@ -154,7 +156,7 @@ const AppLayout = () => {
               </DialogTrigger>
               <DialogContent className="sm:max-w-md grok-card">
                 <DialogHeader>
-                  <DialogTitle className="text-gradient">Notificações</DialogTitle>
+                  <DialogTitle className="text-lg font-semibold">Notificações</DialogTitle>
                   <DialogDescription>
                     Acompanhe suas notificações mais recentes
                   </DialogDescription>
@@ -163,7 +165,7 @@ const AppLayout = () => {
                   {[...Array(5)].map((_, i) => (
                     <div 
                       key={i} 
-                      className="flex items-start gap-3 p-4 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/30 hover:bg-secondary/70 transition-all duration-300 cursor-pointer"
+                      className="flex items-start gap-3 p-3 rounded-lg bg-secondary/40 border border-border/40 hover:bg-secondary/60 transition-all duration-200 cursor-pointer"
                     >
                       <div className={cn(
                         "p-2 rounded-lg", 
@@ -194,15 +196,15 @@ const AppLayout = () => {
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className="flex items-center gap-2 rounded-full bg-secondary/50 border border-border/50 p-1 pl-4 cursor-pointer hover:bg-secondary/70 hover:border-primary/30 transition-all duration-300">
-                  <span className="text-sm font-semibold hidden sm:inline-block">João Silva</span>
-                  <div className="h-9 w-9 rounded-full button-gradient flex items-center justify-center">
-                    <span className="text-sm font-bold text-primary-foreground">JS</span>
+                <div className="flex items-center gap-2 rounded-full bg-secondary/40 border border-border/40 p-1 pl-4 cursor-pointer hover:bg-secondary/60 transition-all duration-200">
+                  <span className="text-sm font-medium hidden sm:inline-block">João Silva</span>
+                  <div className="h-9 w-9 rounded-full bg-foreground text-background flex items-center justify-center">
+                    <span className="text-sm font-semibold">JS</span>
                   </div>
                   <ChevronDown className="h-4 w-4 mr-1 text-muted-foreground sm:inline-block hidden" />
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 dropdown-content">
+              <DropdownMenuContent align="end" className="w-56 glass-card">
                 <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem 

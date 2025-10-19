@@ -41,20 +41,20 @@ export function StatsCard({
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
         {icon && (
-          <div className="text-primary bg-primary/10 p-2 rounded-lg">
+          <div className="text-muted-foreground">
             {icon}
           </div>
         )}
       </div>
       <div className="mt-3 flex items-baseline gap-2">
-        <p className="text-3xl font-bold text-gradient">{value}</p>
+        <p className="text-2xl font-semibold">{value}</p>
         {trend && (
           <span 
             className={cn(
-              "text-sm font-semibold flex items-center gap-1 px-2 py-1 rounded-lg",
+              "text-xs font-medium flex items-center gap-1",
               trend.positive 
-                ? "text-emerald-400 bg-emerald-400/10" 
-                : "text-red-400 bg-red-400/10"
+                ? "text-emerald-400" 
+                : "text-red-400"
             )}
           >
             {trend.positive ? '↑' : '↓'} {Math.abs(trend.value)}%

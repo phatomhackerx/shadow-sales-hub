@@ -141,7 +141,7 @@ const Vendas = () => {
             Descubra produtos para promover e ganhar comissões
           </p>
         </div>
-        <Button variant="grok" size="lg" className="gap-2">
+        <Button size="lg" className="gap-2">
           <Download className="h-5 w-5" />
           <span>Exportar Dados</span>
         </Button>
@@ -241,7 +241,6 @@ const Vendas = () => {
                   
                   <div className="flex flex-col gap-2 pt-2">
                     <Button 
-                      variant="grok"
                       className="w-full"
                       onClick={() => solicitarAfiliacao(produto.id)}
                     >

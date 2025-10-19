@@ -95,7 +95,7 @@ const Produtos = () => {
           <p className="text-muted-foreground mt-2">Gerencie seus produtos e serviços digitais</p>
         </div>
         <Link to="/produtos/novo">
-          <Button variant="grok" size="lg" className="gap-2">
+          <Button size="lg" className="gap-2">
             <Plus className="h-5 w-5" />
             <span>Novo Produto</span>
           </Button>
@@ -205,7 +205,7 @@ const Produtos = () => {
         <div className="grok-card text-center p-12">
           <p className="text-muted-foreground text-lg">Nenhum produto encontrado.</p>
           <Link to="/produtos/novo">
-            <Button variant="grok" size="lg" className="mt-6 gap-2">
+            <Button size="lg" className="mt-6 gap-2">
               <Plus className="h-5 w-5" />
               <span>Criar Novo Produto</span>
             </Button>

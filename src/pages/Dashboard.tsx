@@ -80,11 +80,9 @@ const Dashboard = () => {
           <CardHeader className="pb-4">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-y-3">
               <div>
-                <CardTitle className="text-xl font-bold flex items-center gap-2">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <TrendingUp className="h-5 w-5 text-primary" />
-                  </div>
-                  <span className="text-gradient">Desempenho de Vendas</span>
+                <CardTitle className="text-xl font-semibold flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5" />
+                  Desempenho de Vendas
                 </CardTitle>
                 <CardDescription className="mt-2">
                   Análise do desempenho de vendas dos últimos {
@@ -129,11 +127,9 @@ const Dashboard = () => {
 
         <Card className="grok-card">
           <CardHeader className="pb-4">
-            <CardTitle className="text-xl font-bold flex items-center gap-2">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <BarChart3 className="h-5 w-5 text-primary" />
-              </div>
-              <span className="text-gradient">Meios de Pagamento</span>
+            <CardTitle className="text-xl font-semibold flex items-center gap-2">
+              <BarChart3 className="h-5 w-5" />
+              Meios de Pagamento
             </CardTitle>
             <CardDescription className="mt-2">
               Distribuição das formas de pagamento
@@ -148,11 +144,9 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="grok-card">
           <CardHeader className="pb-4">
-            <CardTitle className="text-xl font-bold flex items-center gap-2">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <Zap className="h-5 w-5 text-primary" />
-              </div>
-              <span className="text-gradient">Produtos Mais Vendidos</span>
+            <CardTitle className="text-xl font-semibold flex items-center gap-2">
+              <Zap className="h-5 w-5" />
+              Produtos Mais Vendidos
             </CardTitle>
             <CardDescription className="mt-2">
               Produtos com melhor desempenho este mês
@@ -168,14 +162,14 @@ const Dashboard = () => {
               ].map((product, index) => (
                 <div 
                   key={index} 
-                  className="flex items-center justify-between p-4 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/30 hover:bg-secondary/70 transition-all duration-300 group cursor-pointer"
+                  className="flex items-center justify-between p-3 rounded-lg bg-secondary/40 border border-border/40 hover:bg-secondary/60 transition-all duration-200 group cursor-pointer"
                 >
                   <div>
-                    <h4 className="font-semibold">{product.name}</h4>
-                    <p className="text-sm text-muted-foreground mt-1">{product.sales} vendas</p>
+                    <h4 className="font-medium">{product.name}</h4>
+                    <p className="text-xs text-muted-foreground mt-1">{product.sales} vendas</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold text-primary">{product.value}</p>
+                    <p className="font-semibold">{product.value}</p>
                     <span className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 mt-1">
                       Ver detalhes
                       <ExternalLink className="h-3 w-3" />
@@ -189,11 +183,9 @@ const Dashboard = () => {
 
         <Card className="grok-card">
           <CardHeader className="pb-4">
-            <CardTitle className="text-xl font-bold flex items-center gap-2">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <Clock className="h-5 w-5 text-primary" />
-              </div>
-              <span className="text-gradient">Atividades Recentes</span>
+            <CardTitle className="text-xl font-semibold flex items-center gap-2">
+              <Clock className="h-5 w-5" />
+              Atividades Recentes
             </CardTitle>
             <CardDescription className="mt-2">
               Últimas transações e eventos
@@ -209,17 +201,17 @@ const Dashboard = () => {
               ].map((activity, index) => (
                 <div 
                   key={index} 
-                  className="flex items-center justify-between p-4 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/30 hover:bg-secondary/70 transition-all duration-300 group cursor-pointer"
+                  className="flex items-center justify-between p-3 rounded-lg bg-secondary/40 border border-border/40 hover:bg-secondary/60 transition-all duration-200 group cursor-pointer"
                 >
                   <div className="flex-1">
-                    <h4 className="font-semibold">{activity.type}</h4>
-                    <p className="text-sm text-muted-foreground mt-1">{activity.description}</p>
+                    <h4 className="font-medium text-sm">{activity.type}</h4>
+                    <p className="text-xs text-muted-foreground mt-1">{activity.description}</p>
                     <p className="text-xs text-muted-foreground/70 mt-1">{activity.time}</p>
                   </div>
                   {activity.value && (
                     <div className="text-right ml-4">
                       <p className={cn(
-                        "font-bold text-lg",
+                        "font-semibold",
                         activity.type === "Reembolso" ? "text-red-400" : "text-emerald-400"
                       )}>
                         {activity.type === "Reembolso" ? `-${activity.value}` : activity.value}
