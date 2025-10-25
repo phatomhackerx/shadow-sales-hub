@@ -106,22 +106,22 @@ const ProdutoCadastro = () => {
   
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center space-x-4">
           <Button 
             variant="outline" 
             size="icon" 
             onClick={() => navigate("/produtos")}
-            className="h-8 w-8"
+            className="h-8 w-8 hover:bg-secondary/60 transition-all"
           >
             <ArrowLeft className="h-4 w-4" />
           </Button>
-          <h1 className="text-2xl font-bold tracking-tight">Novo Produto</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Novo Produto</h1>
         </div>
         <Button 
           onClick={form.handleSubmit(onSubmit)}
           disabled={isSubmitting}
-          className="bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 flex items-center gap-2 interactive-element"
+          className="grok-button w-full sm:w-auto"
         >
           {isSubmitting ? (
             <>Salvando...</>
@@ -257,7 +257,7 @@ const ProdutoCadastro = () => {
         <Button 
           onClick={form.handleSubmit(onSubmit)}
           disabled={isSubmitting}
-          className="bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 flex items-center gap-2 interactive-element"
+          className="grok-button"
         >
           {isSubmitting ? (
             <>Salvando...</>

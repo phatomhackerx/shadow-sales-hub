@@ -162,13 +162,13 @@ const Cupons = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Cupons</h1>
-          <p className="text-muted-foreground">Gerencie seus cupons de desconto e campanhas promocionais</p>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Cupons</h1>
+          <p className="text-muted-foreground text-sm sm:text-base mt-1">Gerencie seus cupons de desconto e campanhas promocionais</p>
         </div>
         <button 
-          className="bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 flex items-center gap-2"
+          className="grok-button w-full sm:w-auto"
           onClick={() => setModalAberto(true)}
         >
           <Plus className="h-4 w-4" />
@@ -176,9 +176,9 @@ const Cupons = () => {
         </button>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <Card className="border border-border bg-card">
-          <CardContent className="p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card className="grok-card">
+          <CardContent className="p-5">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-purple-500/20">
                 <Tag className="h-5 w-5 text-purple-500" />
@@ -191,8 +191,8 @@ const Cupons = () => {
           </CardContent>
         </Card>
         
-        <Card className="border border-border bg-card">
-          <CardContent className="p-4">
+        <Card className="grok-card">
+          <CardContent className="p-5">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-blue-500/20">
                 <Ticket className="h-5 w-5 text-blue-500" />
@@ -205,8 +205,8 @@ const Cupons = () => {
           </CardContent>
         </Card>
         
-        <Card className="border border-border bg-card">
-          <CardContent className="p-4">
+        <Card className="grok-card">
+          <CardContent className="p-5">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-green-500/20">
                 <BarChart2 className="h-5 w-5 text-green-500" />
@@ -219,8 +219,8 @@ const Cupons = () => {
           </CardContent>
         </Card>
         
-        <Card className="border border-border bg-card">
-          <CardContent className="p-4">
+        <Card className="grok-card">
+          <CardContent className="p-5">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-yellow-500/20">
                 <Calendar className="h-5 w-5 text-yellow-500" />
@@ -243,23 +243,23 @@ const Cupons = () => {
         
         <TabsContent value="meus_cupons" className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
-            <div className="relative">
+            <div className="relative flex-1 sm:flex-initial">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <input 
                 type="text" 
                 placeholder="Buscar cupons..." 
-                className="pl-10 pr-4 py-2 w-full sm:w-80 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight"
+                className="grok-input pl-10 w-full sm:w-80"
                 value={pesquisa}
                 onChange={(e) => setPesquisa(e.target.value)}
               />
             </div>
             <div className="flex flex-wrap gap-2">
-              <div className="flex items-center gap-2 px-3 py-2 bg-secondary rounded-md border border-border hover:bg-secondary/80">
+              <div className="flex items-center gap-2 px-3 py-2 grok-input cursor-pointer hover:bg-secondary/60">
                 <Filter className="h-4 w-4" />
-                <span>Filtros</span>
+                <span className="text-sm">Filtros</span>
               </div>
               <select 
-                className="px-3 py-2 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight"
+                className="grok-input"
                 value={filtroStatus}
                 onChange={(e) => setFiltroStatus(e.target.value)}
               >
@@ -269,7 +269,7 @@ const Cupons = () => {
                 <option value="expirado">Expirados</option>
               </select>
               <select 
-                className="px-3 py-2 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight"
+                className="grok-input"
                 value={tipoCupomSelecionado}
                 onChange={(e) => setTipoCupomSelecionado(e.target.value)}
               >
@@ -280,7 +280,7 @@ const Cupons = () => {
             </div>
           </div>
           
-          <div className="rounded-lg border border-border overflow-hidden">
+          <div className="grok-card overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>

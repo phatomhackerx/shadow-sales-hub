@@ -44,14 +44,14 @@ const Relatorios = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Relatórios</h1>
-          <p className="text-muted-foreground">Análise detalhada do seu negócio</p>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Relatórios</h1>
+          <p className="text-muted-foreground text-sm sm:text-base mt-1">Análise detalhada do seu negócio</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
           <select 
-            className="px-3 py-2 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight"
+            className="grok-input flex-1 sm:flex-initial min-w-[140px]"
             value={periodoSelecionado}
             onChange={(e) => setPeriodoSelecionado(e.target.value)}
           >
@@ -61,13 +61,13 @@ const Relatorios = () => {
               </option>
             ))}
           </select>
-          <button className="flex items-center gap-2 px-3 py-2 bg-secondary rounded-md border border-border hover:bg-secondary/80">
+          <button className="flex items-center gap-2 px-3 sm:px-4 py-2 grok-input hover:bg-secondary/60 transition-all">
             <Filter className="h-4 w-4" />
-            <span>Filtros</span>
+            <span className="hidden sm:inline">Filtros</span>
           </button>
-          <button className="flex items-center gap-2 px-3 py-2 bg-highlight hover:bg-highlight-hover text-white rounded-md">
+          <button className="flex items-center gap-2 px-3 sm:px-4 py-2 grok-button">
             <Download className="h-4 w-4" />
-            <span>Exportar</span>
+            <span className="hidden sm:inline">Exportar</span>
           </button>
         </div>
       </div>
@@ -77,38 +77,38 @@ const Relatorios = () => {
           <button
             key={relatorio.id}
             onClick={() => setRelatorioSelecionado(relatorio.id)}
-            className={`flex flex-col h-40 p-4 rounded-lg border border-border ${
-              relatorioSelecionado === relatorio.id ? 'bg-sidebar-accent border-highlight' : 'bg-card hover:bg-secondary/50'
+            className={`grok-card flex flex-col h-40 p-5 transition-all duration-200 ${
+              relatorioSelecionado === relatorio.id ? 'border-foreground/20 bg-secondary/30' : 'hover:border-foreground/10'
             }`}
           >
-            <div className={`p-2 rounded-full w-fit ${
-              relatorioSelecionado === relatorio.id ? 'bg-highlight/20' : 'bg-secondary'
+            <div className={`p-2.5 rounded-lg w-fit transition-all ${
+              relatorioSelecionado === relatorio.id ? 'bg-foreground/10' : 'bg-secondary/50'
             }`}>
               <relatorio.icon className={`h-5 w-5 ${
-                relatorioSelecionado === relatorio.id ? 'text-highlight' : 'text-foreground'
+                relatorioSelecionado === relatorio.id ? 'text-foreground' : 'text-muted-foreground'
               }`} />
             </div>
-            <h3 className="text-lg font-medium mt-4">{relatorio.titulo}</h3>
-            <p className="text-sm text-muted-foreground mt-1">{relatorio.descricao}</p>
+            <h3 className="text-base font-semibold mt-4 text-left">{relatorio.titulo}</h3>
+            <p className="text-xs text-muted-foreground mt-1.5 text-left">{relatorio.descricao}</p>
           </button>
         ))}
       </div>
 
       {relatorioSelecionado ? (
-        <div className="rounded-lg border border-border bg-card p-4">
-          <h3 className="text-lg font-medium mb-4">
+        <div className="grok-card p-6">
+          <h3 className="text-lg font-semibold mb-6">
             {tiposRelatorios.find(r => r.id === relatorioSelecionado)?.titulo}
           </h3>
-          <div className="p-8 flex items-center justify-center border border-dashed border-border rounded-md">
-            <p className="text-muted-foreground">Selecione os parâmetros acima para gerar seu relatório</p>
+          <div className="p-12 flex items-center justify-center border border-dashed border-border/40 rounded-lg bg-secondary/20">
+            <p className="text-muted-foreground text-sm">Selecione os parâmetros acima para gerar seu relatório</p>
           </div>
         </div>
       ) : (
-        <div className="rounded-lg border border-border bg-card p-6">
-          <div className="text-center py-10">
-            <BarChart2 className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-lg font-medium">Selecione um relatório</h3>
-            <p className="text-muted-foreground mt-1">
+        <div className="grok-card p-8">
+          <div className="text-center py-12">
+            <BarChart2 className="h-14 w-14 mx-auto text-muted-foreground/40 mb-4" />
+            <h3 className="text-lg font-semibold">Selecione um relatório</h3>
+            <p className="text-muted-foreground text-sm mt-2 max-w-md mx-auto">
               Escolha um dos tipos de relatório acima para visualizar dados detalhados
             </p>
           </div>

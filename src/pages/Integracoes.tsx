@@ -43,36 +43,36 @@ const Integracoes = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Integrações</h1>
-        <p className="text-muted-foreground">Conecte sua plataforma com outras ferramentas</p>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Integrações</h1>
+        <p className="text-muted-foreground text-sm sm:text-base mt-1">Conecte sua plataforma com outras ferramentas</p>
       </div>
       
-      <div className="flex border-b border-border">
+      <div className="flex border-b border-border/40">
         <button
-          className={`px-4 py-2 font-medium text-sm ${
+          className={`px-5 py-3 font-medium text-sm transition-all ${
             activeTab === "apps" 
-              ? "border-b-2 border-highlight text-highlight" 
-              : "text-muted-foreground"
+              ? "border-b-2 border-foreground text-foreground" 
+              : "text-muted-foreground hover:text-foreground"
           }`}
           onClick={() => setActiveTab("apps")}
         >
           Apps e Serviços
         </button>
         <button
-          className={`px-4 py-2 font-medium text-sm ${
+          className={`px-5 py-3 font-medium text-sm transition-all ${
             activeTab === "api" 
-              ? "border-b-2 border-highlight text-highlight" 
-              : "text-muted-foreground"
+              ? "border-b-2 border-foreground text-foreground" 
+              : "text-muted-foreground hover:text-foreground"
           }`}
           onClick={() => setActiveTab("api")}
         >
           API e Webhooks
         </button>
         <button
-          className={`px-4 py-2 font-medium text-sm ${
+          className={`px-5 py-3 font-medium text-sm transition-all ${
             activeTab === "pixels" 
-              ? "border-b-2 border-highlight text-highlight" 
-              : "text-muted-foreground"
+              ? "border-b-2 border-foreground text-foreground" 
+              : "text-muted-foreground hover:text-foreground"
           }`}
           onClick={() => setActiveTab("pixels")}
         >
@@ -83,7 +83,7 @@ const Integracoes = () => {
       {activeTab === "apps" && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {integracoes.map((integracao) => (
-            <div key={integracao.id} className="p-4 rounded-lg border border-border bg-card">
+            <div key={integracao.id} className="grok-card p-5">
               <div className="flex justify-between">
                 <div className="flex gap-3">
                   <div className="bg-secondary p-2 rounded-md h-fit">
@@ -104,16 +104,16 @@ const Integracoes = () => {
                 <div>
                   {integracao.status === "Conectado" ? (
                     <div className="flex flex-col items-end gap-2">
-                      <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/20 text-green-500">
+                      <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-500">
                         {integracao.status}
                       </span>
-                      <button className="text-sm text-highlight hover:underline flex items-center gap-1">
+                      <button className="text-sm text-foreground hover:underline flex items-center gap-1 transition-all">
                         <Settings className="h-3 w-3" />
                         Configurar
                       </button>
                     </div>
                   ) : (
-                    <button className="px-3 py-1 text-sm bg-highlight hover:bg-highlight-hover text-white rounded-md">
+                    <button className="grok-button text-sm px-3 py-1.5">
                       Conectar
                     </button>
                   )}
@@ -122,8 +122,8 @@ const Integracoes = () => {
             </div>
           ))}
           
-          <div className="p-4 rounded-lg border border-dashed border-border flex flex-col items-center justify-center h-32">
-            <button className="flex items-center gap-2 text-highlight">
+          <div className="grok-card p-5 border-dashed flex flex-col items-center justify-center h-32">
+            <button className="flex items-center gap-2 text-foreground hover:text-foreground/80 transition-all">
               <Plus className="h-5 w-5" />
               <span>Adicionar Nova Integração</span>
             </button>
@@ -133,8 +133,8 @@ const Integracoes = () => {
       
       {activeTab === "api" && (
         <div className="space-y-4">
-          <div className="rounded-lg border border-border bg-card p-4">
-            <h3 className="text-lg font-medium mb-4">Chaves de API</h3>
+          <div className="grok-card p-6">
+            <h3 className="text-lg font-semibold mb-6">Chaves de API</h3>
             <div className="mb-4">
               <p className="text-sm text-muted-foreground mb-2">
                 Use essas chaves para integrar sua plataforma com sistemas externos.
@@ -161,7 +161,7 @@ const Integracoes = () => {
                   <label className="block text-sm font-medium text-muted-foreground mb-1">
                     Ações
                   </label>
-                  <button className="bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2">
+                  <button className="grok-button px-4 py-2">
                     Gerar Nova Chave
                   </button>
                 </div>

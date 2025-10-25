@@ -22,14 +22,14 @@ const Configuracoes = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-gradient mb-1">Configurações</h1>
-          <p className="text-muted-foreground">Personalize sua plataforma de vendas</p>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Configurações</h1>
+          <p className="text-muted-foreground text-sm sm:text-base mt-1">Personalize sua plataforma de vendas</p>
         </div>
         <Button 
           onClick={handleSaveChanges}
-          className="mt-3 sm:mt-0 bg-gradient-to-r from-highlight to-highlight-hover hover:from-highlight-hover hover:to-highlight"
+          className="grok-button w-full sm:w-auto"
         >
           Salvar Alterações
         </Button>
@@ -37,7 +37,7 @@ const Configuracoes = () => {
       
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-1">
-          <Card className="overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm">
+          <Card className="grok-card overflow-hidden">
             <nav className="flex flex-col">
               {[
                 { id: "conta", label: "Conta", icon: User },
@@ -47,21 +47,21 @@ const Configuracoes = () => {
                 { id: "dominio", label: "Domínio", icon: Globe },
                 { id: "seguranca", label: "Segurança", icon: Lock },
               ].map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => setSecaoAtiva(item.id)}
-                  className={`flex items-center gap-3 p-3.5 text-sm transition-colors hover:bg-secondary/50 ${
-                    secaoAtiva === item.id 
-                      ? "bg-secondary/50 font-medium text-highlight" 
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  <item.icon className={`h-4 w-4 ${secaoAtiva === item.id ? "text-highlight" : ""}`} />
-                  <span>{item.label}</span>
-                  
-                  {secaoAtiva === item.id && (
-                    <div className="ml-auto h-1.5 w-1.5 rounded-full bg-highlight"></div>
-                  )}
+              <button
+                key={item.id}
+                onClick={() => setSecaoAtiva(item.id)}
+                className={`flex items-center gap-3 p-4 text-sm transition-all hover:bg-secondary/30 ${
+                  secaoAtiva === item.id 
+                    ? "bg-secondary/30 font-semibold text-foreground" 
+                    : "text-muted-foreground"
+                }`}
+              >
+                <item.icon className={`h-4 w-4 ${secaoAtiva === item.id ? "text-foreground" : ""}`} />
+                <span>{item.label}</span>
+                
+                {secaoAtiva === item.id && (
+                  <div className="ml-auto h-2 w-2 rounded-full bg-foreground"></div>
+                )}
                 </button>
               ))}
             </nav>
@@ -71,9 +71,9 @@ const Configuracoes = () => {
         <div className="lg:col-span-3 space-y-6">
           {secaoAtiva === "conta" && (
             <div className="space-y-6">
-              <Card className="border-border/40 bg-card/80 backdrop-blur-sm">
+              <Card className="grok-card">
                 <CardHeader className="pb-3">
-                  <CardTitle>Informações da Conta</CardTitle>
+                  <CardTitle className="font-semibold">Informações da Conta</CardTitle>
                   <CardDescription>Atualize os detalhes básicos da sua conta e empresa</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -84,7 +84,7 @@ const Configuracoes = () => {
                     <input 
                       type="text" 
                       defaultValue="Minha Empresa"
-                      className="w-full bg-secondary/40 text-foreground rounded-md border border-border/40 p-2.5 focus:outline-none focus:ring-1 focus:ring-highlight focus:border-highlight transition-colors" 
+                      className="grok-input w-full" 
                     />
                   </div>
                   <div>
@@ -110,9 +110,9 @@ const Configuracoes = () => {
                 </CardContent>
               </Card>
               
-              <Card className="border-border/40 bg-card/80 backdrop-blur-sm">
+              <Card className="grok-card">
                 <CardHeader className="pb-3">
-                  <CardTitle>Aparência</CardTitle>
+                  <CardTitle className="font-semibold">Aparência</CardTitle>
                   <CardDescription>Personalize o visual da sua plataforma</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-5">

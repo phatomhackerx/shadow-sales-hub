@@ -164,29 +164,29 @@ const Afiliados = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Afiliados</h1>
-          <p className="text-muted-foreground">Gerencie sua rede de afiliados e programas de afiliação</p>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Afiliados</h1>
+          <p className="text-muted-foreground text-sm sm:text-base mt-1">Gerencie sua rede de afiliados e programas de afiliação</p>
         </div>
-        <div className="flex gap-2">
-          <Link to="/afiliados/solicitacoes">
-            <Button variant="outline" className="flex items-center gap-2">
+        <div className="flex gap-2 w-full sm:w-auto">
+          <Link to="/afiliados/solicitacoes" className="flex-1 sm:flex-initial">
+            <Button variant="outline" className="flex items-center gap-2 w-full hover:bg-secondary/60 transition-all">
               <Clipboard className="h-4 w-4" />
               <span>Solicitações</span>
-              <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center text-[10px] bg-highlight text-white">3</Badge>
+              <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center text-[10px] bg-foreground text-background">3</Badge>
             </Button>
           </Link>
-          <Button className="bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 flex items-center gap-2">
+          <Button className="grok-button flex-1 sm:flex-initial">
             <Plus className="h-4 w-4" />
             <span>Novo Afiliado</span>
           </Button>
         </div>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <Card className="border border-border bg-card">
-          <CardContent className="p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card className="grok-card">
+          <CardContent className="p-5">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-blue-500/20">
                 <Users className="h-5 w-5 text-blue-500" />
@@ -199,8 +199,8 @@ const Afiliados = () => {
           </CardContent>
         </Card>
         
-        <Card className="border border-border bg-card">
-          <CardContent className="p-4">
+        <Card className="grok-card">
+          <CardContent className="p-5">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-green-500/20">
                 <BarChart2 className="h-5 w-5 text-green-500" />
@@ -213,8 +213,8 @@ const Afiliados = () => {
           </CardContent>
         </Card>
         
-        <Card className="border border-border bg-card">
-          <CardContent className="p-4">
+        <Card className="grok-card">
+          <CardContent className="p-5">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-purple-500/20">
                 <Award className="h-5 w-5 text-purple-500" />
@@ -227,8 +227,8 @@ const Afiliados = () => {
           </CardContent>
         </Card>
         
-        <Card className="border border-border bg-card">
-          <CardContent className="p-4">
+        <Card className="grok-card">
+          <CardContent className="p-5">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-yellow-500/20">
                 <Tag className="h-5 w-5 text-yellow-500" />

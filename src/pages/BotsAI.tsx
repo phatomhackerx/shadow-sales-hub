@@ -18,8 +18,8 @@ const BotsAI = () => {
   return (
     <div className="flex flex-col gap-6 animate-fade-in">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">BotsAI</h1>
-        <p className="text-muted-foreground">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">BotsAI</h1>
+        <p className="text-muted-foreground text-sm sm:text-base">
           Gerencie seus links inteligentes, bots personalizados e automações de atendimento
         </p>
       </div>
@@ -46,7 +46,7 @@ const BotsAI = () => {
         
         <TabsContent value="overview" className="mt-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="border border-border/50 bg-card hover:shadow-md transition-all duration-300 hover:border-border">
+            <Card className="grok-card hover:border-foreground/10 transition-all duration-300">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="p-2 rounded-md bg-primary/10">
@@ -72,7 +72,7 @@ const BotsAI = () => {
               </CardContent>
               <CardFooter>
                 <Button 
-                  className="w-full" 
+                  className="grok-button w-full" 
                   onClick={() => handleCreateNew("smart link")}
                 >
                   <Plus className="mr-2 h-4 w-4" /> Criar Smart Link
@@ -80,7 +80,7 @@ const BotsAI = () => {
               </CardFooter>
             </Card>
 
-            <Card className="border border-border/50 bg-card hover:shadow-md transition-all duration-300 hover:border-border">
+            <Card className="grok-card hover:border-foreground/10 transition-all duration-300">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="p-2 rounded-md bg-blue-500/10">
@@ -115,7 +115,7 @@ const BotsAI = () => {
               </CardFooter>
             </Card>
 
-            <Card className="border border-border/50 bg-card hover:shadow-md transition-all duration-300 hover:border-border">
+            <Card className="grok-card hover:border-foreground/10 transition-all duration-300">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="p-2 rounded-md bg-green-500/10">
@@ -152,7 +152,7 @@ const BotsAI = () => {
           </div>
 
           <div className="mt-8">
-            <Card className="border border-border/50 bg-card hover:shadow-md transition-all duration-300 hover:border-border">
+            <Card className="grok-card hover:border-foreground/10 transition-all duration-300">
               <CardHeader>
                 <CardTitle className="text-xl">Comece a usar o BotsAI</CardTitle>
                 <CardDescription>
@@ -239,7 +239,7 @@ const BotsAI = () => {
         </TabsContent>
 
         <TabsContent value="smart-links" className="mt-6">
-          <Card className="border border-border/50">
+          <Card className="grok-card">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Smart Links</CardTitle>
@@ -269,7 +269,7 @@ const BotsAI = () => {
         </TabsContent>
 
         <TabsContent value="bots" className="mt-6">
-          <Card className="border border-border/50">
+          <Card className="grok-card">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Bots & Agentes</CardTitle>
@@ -299,7 +299,7 @@ const BotsAI = () => {
         </TabsContent>
 
         <TabsContent value="channels" className="mt-6">
-          <Card className="border border-border/50">
+          <Card className="grok-card">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Canais</CardTitle>

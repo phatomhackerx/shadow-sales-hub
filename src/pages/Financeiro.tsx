@@ -64,12 +64,12 @@ const Financeiro = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Financeiro</h1>
-        <p className="text-muted-foreground">Gerencie suas finanças e pagamentos</p>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Financeiro</h1>
+        <p className="text-muted-foreground text-sm sm:text-base mt-1">Gerencie suas finanças e pagamentos</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="overflow-hidden border-border bg-gradient-to-br from-secondary/50 to-background shadow-md">
+        <Card className="grok-card overflow-hidden">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-normal text-muted-foreground">Saldo Disponível</CardTitle>
           </CardHeader>
@@ -78,7 +78,7 @@ const Financeiro = () => {
               <span className="text-3xl font-bold mt-1">R$ 8.445,00</span>
               <Dialog open={showSaqueDialog} onOpenChange={setShowSaqueDialog}>
                 <DialogTrigger asChild>
-                  <Button className="mt-4 bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 text-sm w-full">
+                  <Button className="grok-button mt-4 w-full">
                     Solicitar Saque
                   </Button>
                 </DialogTrigger>
@@ -117,7 +117,7 @@ const Financeiro = () => {
           </CardContent>
         </Card>
         
-        <Card className="overflow-hidden border-border bg-gradient-to-br from-secondary/50 to-background shadow-md">
+        <Card className="grok-card overflow-hidden">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-normal text-muted-foreground">Em Análise</CardTitle>
           </CardHeader>
@@ -152,7 +152,7 @@ const Financeiro = () => {
           </CardContent>
         </Card>
         
-        <Card className="overflow-hidden border-border bg-gradient-to-br from-secondary/50 to-background shadow-md">
+        <Card className="grok-card overflow-hidden">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-normal text-muted-foreground">Total Faturado (Mês)</CardTitle>
           </CardHeader>
@@ -175,12 +175,12 @@ const Financeiro = () => {
           <input 
             type="text" 
             placeholder="Buscar transações..." 
-            className="pl-10 pr-4 py-2 w-full md:w-80 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight"
+            className="grok-input pl-10 w-full md:w-80"
           />
         </div>
         <div className="flex flex-wrap gap-2">
           <select 
-            className="px-3 py-2 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight"
+            className="grok-input"
             value={periodoSelecionado}
             onChange={(e) => setPeriodoSelecionado(e.target.value)}
           >
@@ -195,14 +195,14 @@ const Financeiro = () => {
             <Calendar className="h-4 w-4 mr-2" />
             <span>Datas</span>
           </Button>
-          <Button className="bg-highlight hover:bg-highlight-hover text-white h-10">
+          <Button className="grok-button h-10">
             <Download className="h-4 w-4 mr-2" />
             <span>Exportar</span>
           </Button>
         </div>
       </div>
       
-      <Card className="border-border overflow-hidden">
+      <Card className="grok-card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -253,9 +253,9 @@ const Financeiro = () => {
         </div>
       </Card>
       
-      <Card className="border-border bg-card">
+      <Card className="grok-card">
         <CardHeader>
-          <CardTitle className="text-lg font-medium">Contas Bancárias</CardTitle>
+          <CardTitle className="text-lg font-semibold">Contas Bancárias</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

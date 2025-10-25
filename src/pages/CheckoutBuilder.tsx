@@ -83,36 +83,36 @@ const CheckoutBuilder = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center space-x-4">
           <Link to={`/produtos/${id}`}>
-            <Button variant="outline" size="icon" className="h-9 w-9">
+            <Button variant="outline" size="icon" className="h-9 w-9 hover:bg-secondary/60 transition-all">
               <ArrowLeft className="h-4 w-4" />
             </Button>
           </Link>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Construtor de Checkout</h1>
-            <p className="text-muted-foreground">Personalização visual do checkout para seu produto</p>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Construtor de Checkout</h1>
+            <p className="text-muted-foreground text-sm sm:text-base mt-1">Personalização visual do checkout para seu produto</p>
           </div>
         </div>
         
         <div className="flex space-x-2 w-full sm:w-auto">
           <Button 
             variant="outline" 
-            className="flex-1 sm:flex-initial"
+            className="flex-1 sm:flex-initial hover:bg-secondary/60 transition-all"
             onClick={handlePublish}
           >
             <Share2 className="h-4 w-4 mr-2" />
-            Publicar
+            <span className="hidden sm:inline">Publicar</span>
           </Button>
           <Button 
             onClick={handleSave}
             disabled={saving}
-            className="bg-highlight hover:bg-highlight-hover text-white flex-1 sm:flex-initial"
+            className="grok-button flex-1 sm:flex-initial"
           >
             {saving ? (
               <>Salvando...</>
             ) : (
               <>
                 <Save className="h-4 w-4 mr-2" />
-                Salvar
+                <span className="hidden sm:inline">Salvar</span>
               </>
             )}
           </Button>
@@ -141,8 +141,8 @@ const CheckoutBuilder = () => {
             </TabsList>
           </Tabs>
 
-          <Card>
-            <CardContent className="p-4">
+          <Card className="grok-card">
+            <CardContent className="p-5">
               {activeTab === "designer" && <CheckoutDesigner checkout={checkout} setCheckout={setCheckout} />}
               {activeTab === "settings" && <CheckoutSettings checkout={checkout} setCheckout={setCheckout} />}
               {activeTab === "code" && <CheckoutCode checkout={checkout} />}
@@ -152,9 +152,9 @@ const CheckoutBuilder = () => {
         </div>
 
         <div className="lg:col-span-9">
-          <Card className="border border-border overflow-hidden">
-            <div className="flex items-center justify-between border-b border-border p-4">
-              <h3 className="font-medium">Preview do Checkout</h3>
+          <Card className="grok-card overflow-hidden">
+            <div className="flex items-center justify-between border-b border-border/40 p-4">
+              <h3 className="font-semibold">Preview do Checkout</h3>
               <div className="flex bg-secondary rounded-md">
                 <Button 
                   variant="ghost" 

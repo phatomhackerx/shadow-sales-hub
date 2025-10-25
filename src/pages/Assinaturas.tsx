@@ -151,13 +151,13 @@ const Assinaturas = () => {
   
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Assinaturas</h1>
-          <p className="text-muted-foreground">Gerencie seus produtos por assinatura e assinantes</p>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Assinaturas</h1>
+          <p className="text-muted-foreground text-sm sm:text-base mt-1">Gerencie seus produtos por assinatura e assinantes</p>
         </div>
-        <Link to="/produtos/novo">
-          <Button className="bg-highlight hover:bg-highlight-hover text-white rounded-md px-4 py-2 flex items-center gap-2">
+        <Link to="/produtos/novo" className="w-full sm:w-auto">
+          <Button className="grok-button w-full sm:w-auto">
             <Plus className="h-4 w-4" />
             <span>Novo Plano</span>
           </Button>
@@ -172,31 +172,31 @@ const Assinaturas = () => {
         
         <TabsContent value="meus_produtos" className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
-            <div className="relative">
+            <div className="relative flex-1 sm:flex-initial">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <input 
                 type="text" 
                 placeholder="Buscar produtos..." 
-                className="pl-10 pr-4 py-2 w-full sm:w-80 bg-secondary text-foreground rounded-md border border-border focus:outline-none focus:ring-1 focus:ring-highlight"
+                className="grok-input pl-10 w-full sm:w-80"
                 value={pesquisa}
                 onChange={(e) => setPesquisa(e.target.value)}
               />
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" className="flex items-center gap-2">
+              <Button variant="outline" className="flex items-center gap-2 hover:bg-secondary/60 transition-all">
                 <Filter className="h-4 w-4" />
-                <span>Filtrar</span>
+                <span className="hidden sm:inline">Filtrar</span>
               </Button>
-              <Button variant="outline" className="flex items-center gap-2">
+              <Button variant="outline" className="flex items-center gap-2 hover:bg-secondary/60 transition-all">
                 <Download className="h-4 w-4" />
-                <span>Exportar</span>
+                <span className="hidden sm:inline">Exportar</span>
               </Button>
             </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {filtrarProdutos().map((produto) => (
-              <Card key={produto.id} className="overflow-hidden border border-border hover:border-highlight/30 transition-all duration-300">
+              <Card key={produto.id} className="grok-card overflow-hidden hover:border-foreground/10 transition-all duration-300">
                 <div className="relative h-40 w-full overflow-hidden">
                   <img 
                     src={produto.imagem} 
@@ -242,13 +242,13 @@ const Assinaturas = () => {
                   <div className="p-4 border-t border-border flex space-x-2">
                     <Button 
                       variant="outline" 
-                      className="flex-1 border-highlight/50 text-highlight hover:bg-highlight/10"
+                      className="flex-1 hover:bg-secondary/60 transition-all"
                       onClick={() => editarProduto(produto.id)}
                     >
                       Editar
                     </Button>
                     <Link to={`/produtos/${produto.id}/checkout-builder`} className="flex-1">
-                      <Button variant="default" className="w-full bg-highlight hover:bg-highlight-hover">
+                      <Button className="grok-button w-full">
                         Checkout Builder
                       </Button>
                     </Link>
@@ -351,20 +351,20 @@ const Assinaturas = () => {
         </TabsContent>
       </Tabs>
       
-      <div className="rounded-lg border border-border bg-card p-4">
-        <h3 className="text-lg font-medium mb-4">Resumo de Assinaturas</h3>
+      <div className="grok-card p-6">
+        <h3 className="text-lg font-semibold mb-6">Resumo de Assinaturas</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="p-4 border border-border rounded-md">
+          <div className="p-5 border border-border/40 rounded-lg bg-secondary/20 hover:bg-secondary/30 transition-all">
             <div className="text-sm text-muted-foreground">Assinaturas Ativas</div>
-            <div className="text-2xl font-semibold mt-1">3</div>
+            <div className="text-2xl font-bold mt-2">3</div>
           </div>
-          <div className="p-4 border border-border rounded-md">
+          <div className="p-5 border border-border/40 rounded-lg bg-secondary/20 hover:bg-secondary/30 transition-all">
             <div className="text-sm text-muted-foreground">Receita Mensal</div>
-            <div className="text-2xl font-semibold mt-1">R$ 291,00</div>
+            <div className="text-2xl font-bold mt-2">R$ 291,00</div>
           </div>
-          <div className="p-4 border border-border rounded-md">
+          <div className="p-5 border border-border/40 rounded-lg bg-secondary/20 hover:bg-secondary/30 transition-all">
             <div className="text-sm text-muted-foreground">Taxa de Retenção</div>
-            <div className="text-2xl font-semibold mt-1">85%</div>
+            <div className="text-2xl font-bold mt-2">85%</div>
           </div>
         </div>
       </div>
