@@ -49,10 +49,10 @@ const ProductGeneral = ({ form }: ProductGeneralProps) => {
   
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Informações Principais</CardTitle>
-          <CardDescription>
+      <Card className="grok-card">
+        <CardHeader className="space-y-2">
+          <CardTitle className="text-xl sm:text-2xl">Informações Principais</CardTitle>
+          <CardDescription className="text-sm">
             Defina as informações básicas do seu produto digital
           </CardDescription>
         </CardHeader>
@@ -180,10 +180,10 @@ const ProductGeneral = ({ form }: ProductGeneralProps) => {
           />
           
           <div>
-            <FormLabel htmlFor="imagem">Imagem do Produto</FormLabel>
-            <div className="mt-2">
+            <FormLabel htmlFor="imagem" className="text-sm font-medium">Imagem do Produto</FormLabel>
+            <div className="mt-3">
               {!imagemPreview ? (
-                <div className="border-2 border-dashed border-border rounded-md p-6 text-center hover:border-highlight/50 transition-colors cursor-pointer">
+                <div className="border-2 border-dashed border-border/50 rounded-lg p-8 sm:p-12 text-center hover:border-primary/50 hover:bg-secondary/20 transition-all cursor-pointer">
                   <input 
                     type="file" 
                     id="imagem" 
@@ -191,27 +191,29 @@ const ProductGeneral = ({ form }: ProductGeneralProps) => {
                     onChange={handleImagemUpload}
                     accept="image/jpeg,image/png"
                   />
-                  <label htmlFor="imagem" className="cursor-pointer">
-                    <Upload className="h-10 w-10 mx-auto text-muted-foreground" />
-                    <p className="mt-2 text-sm font-medium text-foreground">
+                  <label htmlFor="imagem" className="cursor-pointer block">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+                      <Upload className="h-6 w-6 text-primary" />
+                    </div>
+                    <p className="text-sm font-medium text-foreground mb-1">
                       Clique para fazer upload ou arraste a imagem aqui
                     </p>
-                    <p className="mt-1 text-xs text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                       JPG ou PNG, tamanho recomendado: 300x250px
                     </p>
                   </label>
                 </div>
               ) : (
-                <div className="relative">
+                <div className="relative inline-block max-w-full">
                   <img 
                     src={imagemPreview} 
                     alt="Preview" 
-                    className="max-h-[250px] rounded-md mx-auto object-contain border border-border"
+                    className="max-h-[250px] sm:max-h-[300px] rounded-lg object-contain border-2 border-border shadow-sm"
                   />
                   <Button 
                     variant="destructive" 
                     size="icon"
-                    className="absolute top-2 right-2 h-8 w-8 rounded-full"
+                    className="absolute -top-2 -right-2 h-8 w-8 rounded-full shadow-lg"
                     onClick={removerImagem}
                   >
                     <X className="h-4 w-4" />

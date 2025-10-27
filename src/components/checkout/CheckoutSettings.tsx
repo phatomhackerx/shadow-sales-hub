@@ -41,20 +41,20 @@ const CheckoutSettings = ({ checkout, setCheckout }: CheckoutSettingsProps) => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 sm:space-y-6">
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-3 mb-4">
-          <TabsTrigger value="appearance">Aparência</TabsTrigger>
-          <TabsTrigger value="form">Formulário</TabsTrigger>
-          <TabsTrigger value="payment">Pagamento</TabsTrigger>
+        <TabsList className="grid grid-cols-3 mb-6 h-auto p-1">
+          <TabsTrigger value="appearance" className="py-2 text-sm">Aparência</TabsTrigger>
+          <TabsTrigger value="form" className="py-2 text-sm">Formulário</TabsTrigger>
+          <TabsTrigger value="payment" className="py-2 text-sm">Pagamento</TabsTrigger>
         </TabsList>
         
-        <TabsContent value="appearance" className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="primaryColor">Cor Primária</Label>
-            <div className="flex space-x-2">
+        <TabsContent value="appearance" className="space-y-4 sm:space-y-6">
+          <div className="space-y-3">
+            <Label htmlFor="primaryColor" className="text-sm font-medium">Cor Primária</Label>
+            <div className="flex space-x-3">
               <div 
-                className="w-10 h-10 rounded-md border"
+                className="w-12 h-12 rounded-lg border-2 border-border shadow-sm flex-shrink-0"
                 style={{ backgroundColor: checkout.settings.primaryColor }}
               />
               <Input
@@ -62,7 +62,7 @@ const CheckoutSettings = ({ checkout, setCheckout }: CheckoutSettingsProps) => {
                 type="color"
                 value={checkout.settings.primaryColor}
                 onChange={(e) => updateSettings('primaryColor', e.target.value)}
-                className="w-full"
+                className="w-full h-12 cursor-pointer"
               />
             </div>
           </div>

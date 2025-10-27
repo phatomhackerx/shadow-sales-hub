@@ -12,9 +12,9 @@ const COLORS = ["#3B82F6", "#10B981", "#F59E0B", "#8B5CF6"];
 
 export function PaymentMethodsChart() {
   return (
-    <div className="rounded-lg border border-border bg-card p-4 h-full">
-      <h3 className="text-lg font-medium mb-6">Meios de Pagamento</h3>
-      <div className="h-[300px]">
+    <div className="grok-card p-4 sm:p-6 h-full">
+      <h3 className="text-base sm:text-lg font-medium mb-6">Meios de Pagamento</h3>
+      <div className="h-[250px] sm:h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -22,7 +22,7 @@ export function PaymentMethodsChart() {
               cx="50%"
               cy="50%"
               labelLine={false}
-              outerRadius={100}
+              outerRadius={80}
               fill="#8884d8"
               dataKey="value"
               label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
@@ -33,9 +33,16 @@ export function PaymentMethodsChart() {
             </Pie>
             <Tooltip 
               formatter={(value) => `${value}%`}
-              contentStyle={{ backgroundColor: "#222", borderColor: "#333" }}
+              contentStyle={{ 
+                backgroundColor: "hsl(var(--card))", 
+                borderColor: "hsl(var(--border))",
+                borderRadius: "8px",
+                boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)"
+              }}
             />
-            <Legend />
+            <Legend 
+              wrapperStyle={{ fontSize: "12px" }}
+            />
           </PieChart>
         </ResponsiveContainer>
       </div>

@@ -56,24 +56,24 @@ const SortableItem = ({ id, type, onRemove }: SortableItemProps) => {
     <div 
       ref={setNodeRef} 
       style={style} 
-      className="bg-secondary rounded-md mb-2 border border-border"
+      className="bg-secondary/50 rounded-lg mb-2 border border-border/50 hover:border-border transition-colors"
     >
       <div className="flex items-center justify-between p-3">
         <div className="flex items-center space-x-3">
           <div 
             {...attributes} 
             {...listeners}
-            className="cursor-grab p-1 rounded-md hover:bg-muted"
+            className="cursor-grab p-1.5 rounded-md hover:bg-muted transition-colors active:cursor-grabbing"
           >
             <GripVertical className="h-4 w-4 text-muted-foreground" />
           </div>
-          <Icon className="h-4 w-4 text-muted-foreground" />
-          <span>{elementConfig?.label || type}</span>
+          <Icon className="h-4 w-4 text-primary" />
+          <span className="text-sm font-medium">{elementConfig?.label || type}</span>
         </div>
         <Button 
           variant="ghost" 
           size="icon" 
-          className="h-7 w-7 text-muted-foreground hover:text-red-500"
+          className="h-8 w-8 text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
           onClick={onRemove}
         >
           <Trash2 className="h-4 w-4" />
@@ -133,9 +133,9 @@ const CheckoutDesigner = ({ checkout, setCheckout }: CheckoutDesignerProps) => {
   };
   
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 sm:space-y-6">
       <div className="space-y-1.5">
-        <Label>Elementos do Checkout</Label>
+        <Label className="text-base">Elementos do Checkout</Label>
         <p className="text-sm text-muted-foreground">Arraste para reordenar os elementos</p>
       </div>
       
@@ -146,20 +146,20 @@ const CheckoutDesigner = ({ checkout, setCheckout }: CheckoutDesignerProps) => {
         onValueChange={setActiveCategory}
         className="space-y-2"
       >
-        <AccordionItem value="elements" className="border rounded-md overflow-hidden">
-          <AccordionTrigger className="px-3 py-2 hover:no-underline">
+        <AccordionItem value="elements" className="grok-card border-0 overflow-hidden">
+          <AccordionTrigger className="px-4 py-3 hover:no-underline font-medium">
             Adicionar Elementos
           </AccordionTrigger>
-          <AccordionContent className="p-3 pt-0 space-y-2">
-            <div className="grid grid-cols-2 gap-2">
+          <AccordionContent className="px-4 pb-4 pt-2 space-y-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {availableElements.map((element) => (
                 <Button
                   key={element.type}
                   variant="outline"
-                  className="h-auto py-2 justify-start"
+                  className="h-auto py-3 justify-start hover:bg-secondary/80 transition-colors"
                   onClick={() => addElement(element.type)}
                 >
-                  <element.icon className="h-4 w-4 mr-2" />
+                  <element.icon className="h-4 w-4 mr-2 text-primary" />
                   <span className="text-sm">{element.label}</span>
                 </Button>
               ))}
@@ -168,11 +168,11 @@ const CheckoutDesigner = ({ checkout, setCheckout }: CheckoutDesignerProps) => {
         </AccordionItem>
       </Accordion>
 
-      <div className="border rounded-md p-3">
-        <p className="text-sm font-medium mb-3">Estrutura do Checkout</p>
+      <div className="grok-card p-4">
+        <p className="text-sm font-medium mb-4">Estrutura do Checkout</p>
         
         {checkout.elements.length === 0 ? (
-          <div className="p-8 text-center border border-dashed rounded-md bg-muted/50">
+          <div className="p-8 sm:p-12 text-center border border-dashed rounded-lg bg-secondary/30">
             <p className="text-sm text-muted-foreground mb-4">Nenhum elemento adicionado ao checkout</p>
             <Button 
               variant="outline" 

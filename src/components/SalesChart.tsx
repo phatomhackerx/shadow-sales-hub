@@ -23,18 +23,18 @@ export function SalesChart() {
   const [selectedOption, setSelectedOption] = useState("30dias");
 
   return (
-    <div className="rounded-lg border border-border bg-card p-4 h-full">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-medium">Vendas e Taxas de Aprovação</h3>
-        <div className="flex space-x-1 rounded-md border border-border bg-card p-1">
+    <div className="grok-card p-4 sm:p-6 h-full">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <h3 className="text-base sm:text-lg font-medium">Vendas e Taxas de Aprovação</h3>
+        <div className="flex space-x-1 rounded-lg border border-border/50 bg-background/50 p-1">
           {chartOptions.map((option) => (
             <button
               key={option.value}
               onClick={() => setSelectedOption(option.value)}
-              className={`px-2.5 py-1 text-xs font-medium rounded-sm ${
+              className={`px-2.5 sm:px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
                 selectedOption === option.value 
-                  ? "bg-highlight text-white" 
-                  : "text-muted-foreground hover:bg-secondary"
+                  ? "bg-foreground text-background shadow-sm" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
               }`}
             >
               {option.label}
@@ -42,26 +42,54 @@ export function SalesChart() {
           ))}
         </div>
       </div>
-      <div className="h-[300px]">
+      <div className="h-[250px] sm:h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={data}
-            margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+            margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
-            <XAxis dataKey="name" stroke="#888" />
-            <YAxis yAxisId="left" stroke="#888" />
-            <YAxis yAxisId="right" orientation="right" stroke="#888" />
-            <Tooltip contentStyle={{ backgroundColor: "#222", borderColor: "#333" }} />
-            <Legend />
+            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} opacity={0.3} />
+            <XAxis 
+              dataKey="name" 
+              stroke="hsl(var(--muted-foreground))" 
+              fontSize={12}
+              tickLine={false}
+            />
+            <YAxis 
+              yAxisId="left" 
+              stroke="hsl(var(--muted-foreground))" 
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
+            <YAxis 
+              yAxisId="right" 
+              orientation="right" 
+              stroke="hsl(var(--muted-foreground))" 
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
+            <Tooltip 
+              contentStyle={{ 
+                backgroundColor: "hsl(var(--card))", 
+                borderColor: "hsl(var(--border))",
+                borderRadius: "8px",
+                boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)"
+              }}
+              labelStyle={{ color: "hsl(var(--foreground))" }}
+            />
+            <Legend 
+              wrapperStyle={{ fontSize: "12px" }}
+            />
             <Line
               yAxisId="left"
               type="monotone"
               dataKey="vendas"
-              stroke="#3B82F6"
+              stroke="hsl(var(--primary))"
               strokeWidth={2}
-              dot={{ r: 4 }}
-              activeDot={{ r: 6 }}
+              dot={{ r: 3, fill: "hsl(var(--primary))" }}
+              activeDot={{ r: 5 }}
             />
             <Line
               yAxisId="right"
@@ -69,7 +97,8 @@ export function SalesChart() {
               dataKey="aprovacao"
               stroke="#10B981"
               strokeWidth={2}
-              dot={{ r: 4 }}
+              dot={{ r: 3, fill: "#10B981" }}
+              activeDot={{ r: 5 }}
             />
           </LineChart>
         </ResponsiveContainer>
